@@ -1,0 +1,14 @@
+{
+     "button":[
+      {
+           "name":"测试",
+           "sub_button":[
+           {
+               "type":"view",
+               "name":"测试report",
+               "url":"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa4cc0a202b65477c&redirect_uri=http://17157bv023.51mypc.cn/bh-report-web/weixin/Oauth.do&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect"
+            }]
+       }]
+ }
+
+
