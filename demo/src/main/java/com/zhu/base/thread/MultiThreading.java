@@ -1,12 +1,10 @@
-package com.zhu.base.multithreading;
+package com.zhu.base.thread;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,9 +34,9 @@ public class MultiThreading {
             Future<String> future = executorService.submit(new Callable<String>() {
                 @Override
                 public String call() throws Exception {
-                    Thread.sleep(2000);
-                    System.out.println("线程 "+t);
-                    return "线程-"+t;
+                    Thread.sleep((long) Math.random()*10000);
+                   // System.out.println(Thread.currentThread().getName());
+                    return "Thread:"+t;
                 }
             });
             futureList.add(future);
@@ -46,8 +44,8 @@ public class MultiThreading {
         executorService.shutdown();
         for (Future<String> fs : futureList) {
             try {
-                fs.get();
-                //System.out.println(fs.get()); // 打印各个线程（任务）执行的结果
+                String result = fs.get();
+                System.out.println(result);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

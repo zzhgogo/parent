@@ -53,7 +53,28 @@ public class MyStringTest {
         }
         System.out.println(StringUtils.join(lines, ""));
         System.out.println(StringUtils.remove("asdf", "sd"));
+    }
 
+    @Test
+    public void t4(){
+        Long start1 = System.nanoTime();
+        String a = "abc";
+        a = a +"efg";
+        Long end1 = System.nanoTime();
+        System.out.println("time: "+(end1-start1));
+
+        Long start2 = System.nanoTime();
+        StringBuffer aa = new StringBuffer("abc");
+        aa.append("efg");
+        Long end2 = System.nanoTime();
+        System.out.println("time: "+(end2-start2));
+
+        Long start3 = System.nanoTime();
+        StringBuilder aaa = new StringBuilder("abc");
+        aaa.append("efg");
+        aaa.toString();
+        Long end3 = System.nanoTime();
+        System.out.println("time: "+(end3-start3));
 
 
     }

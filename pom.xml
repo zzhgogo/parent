@@ -12,7 +12,6 @@
         <module>framework</module>
         <module>rabbitmq</module>
         <module>mysql-freemaker-generator</module>
-        <module>easypoi</module>
         <module>demo</module>
     </modules>
     <properties>
