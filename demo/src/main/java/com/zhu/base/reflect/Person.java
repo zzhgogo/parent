@@ -18,6 +18,9 @@ public class Person implements Serializable {
         this.age = age;
     }
 
+    public Person() {}
+
+
     public String getName() {
         return name;
     }

@@ -27,11 +27,17 @@ public class MyStringTest {
         for (int i = 0 ; i < 100000 ; i++){
             lines.add("非凡之星-"+i);
         }
-        IOUtils.writeLines(lines,  null, new FileOutputStream("E://1.txt"));
-        FileInputStream fileInputStream = new FileInputStream("E://1.txt");
+        String path = MyStringTest.class.getResource("/").getPath()+"1.txt";
+        File file = new File(path);
+        if(file.exists()==false){
+            file.createNewFile();
+        }
+        IOUtils.writeLines(lines,  null, new FileOutputStream(path));
+        FileInputStream fileInputStream = new FileInputStream(path);
         List<String> list = IOUtils.readLines(fileInputStream);
 
-        FileUtils.writeLines(new File("E://1.txt"), lines);
+        FileUtils.writeLines(file, lines);
+
         System.out.print(list);
 
     }
@@ -76,6 +82,11 @@ public class MyStringTest {
         Long end3 = System.nanoTime();
         System.out.println("time: "+(end3-start3));
 
+    }
 
+    @Test
+    public void t5(){
+        String s = MyStringTest.class.getResource("/").getPath();
+        System.out.println(s);
     }
 }
