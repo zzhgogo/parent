@@ -1,6 +1,8 @@
 package com.zhu.base.string;
 
 import com.zhu.base.property.Mypropetry;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -89,4 +91,27 @@ public class MyStringTest {
         String s = MyStringTest.class.getResource("/").getPath();
         System.out.println(s);
     }
+
+    @Test
+    public void md5(){
+        String str  = "abcd"; //待加密字符串
+
+        //1、MD5加密
+        String md5Str = DigestUtils.md5Hex(str);
+        System.out.println("MD5-->" + md5Str);
+
+        //SHA1加密
+        String sha1Str = DigestUtils.sha1Hex(str);
+        System.out.println("SHA1-->" + sha1Str);
+
+        //Base64加密
+        String base64Str = Base64.encodeBase64String(str.getBytes());
+        System.out.println("base64加密-->" + base64Str);
+
+        //Base64解密
+        String base64DecodeStr = new String(Base64.decodeBase64(base64Str));
+        System.out.println("base64解密-->" + base64DecodeStr);
+
+    }
+
 }
