@@ -18,7 +18,10 @@ public class DemoController {
 
     @RequestMapping("demo/index")
     public String index(){
-        producer.sendDirectQueue("123456");
+        for(int i = 0 ; i < 10000; i++){
+            producer.sendDirectQueue(""+i);
+        }
+
 //        try {
 //            Map<String, Object> map = new HashMap<String, Object>();
 //            map.put("data", "hello rabbitmq");
