@@ -1,0 +1,6 @@
+一.使用软件
+   mysql(主从)、redis(哨兵、集群)、rabbitMq(消息队列)、mongoDB(非关系型数据库)
+二.开发技术
+   Dubbo、Zookpeer、Spring、SpringMVC、Mybaits、redisTemplete、Mongo
+   CAS 单点登录, Shiro
+
