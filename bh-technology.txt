@@ -1,6 +1,5 @@
 一.使用软件
-   mysql(主从)、redis(哨兵、集群)、rabbitMq(消息队列)、mongoDB(非关系型数据库)
+   mysql(主从)、redis(哨兵、集群)、rabbitMq(消息队列)、mongoDB(非关系型数据库)、cas(单点登录)、nginx(负载均衡、代理)
 二.开发技术
-   Dubbo、Zookpeer、Spring、SpringMVC、Mybaits、redisTemplete、Mongo
-   CAS 单点登录, Shiro
+   1.Dubbo、Zookpeer、Spring、SpringMVC、Mybaits、redisTemplete、Mongo、单点登录, Shiro
 
