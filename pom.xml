@@ -13,7 +13,7 @@
         <module>rabbitmq</module>
         <module>mysql-freemaker-generator</module>
         <module>demo</module>
-        <module>spring-rabbitMq</module>
+        <module>spring-all</module>
         <module>spring-quartz</module>
     </modules>
     <properties>

@@ -25,6 +25,7 @@
         </property>
     </bean>
 
+
     <import resource="classpath:spring-rabbitmq-core.xml"/>
     <import resource="classpath:spring-rabbitmq-provider.xml"/>
     <import resource="classpath:spring-rabbitmq-comsumer.xml"/>
