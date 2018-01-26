@@ -1,5 +1,14 @@
 一.使用软件
    mysql(主从)、redis(哨兵、集群)、rabbitMq(消息队列)、mongoDB(非关系型数据库)、cas(单点登录)、nginx(负载均衡、代理)
 二.开发技术
-   1.Dubbo、Zookpeer、Spring、SpringMVC、Mybaits、redisTemplete、Mongo、单点登录, Shiro
+   1.Dubbo+Zookpeer、Spring、SpringMVC、Mybaits、redisTemplete、Mongo、单点登录, Shiro
+   2.html、bootstrap、jquery、vue
+三.(非凡之星房产销售系统)
+  客户导入：一键导入客户；一键优化支持去重复、去无效号码等；
+  洗客管理：智能自动拨号，灵活填写跟进信息，极大的提高了业务员的电话量以及工作效率；
+  客户管理：对客户进行分级，分标签管理，和对客户填写跟进记录，实时查看客户跟进状态；随时随地了解客户的最新信息，更有利于抓住客户，提高成交率；
+  跟进管理：实时对客户填写跟进记录，查看跟进状态，更有效的管理客户；
+  报表管理：可以对系统数据进行各种形式的统计汇总，生成各种报表和视图，为领导者提供精准的决策数据支持；
+  协同办公：集成了标准化的功能模块，并可按需定制，充分满足用户多样化和深层次协同办公需求；
+  移动OA：可无缝集成手机OA系统，支持安卓、苹果等各种手机类型，支持WORD/EXCEL/HTML/PPT/PDF等格式模板和文件，实现完美移动办公应用；
 

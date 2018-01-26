@@ -15,6 +15,7 @@
         <module>demo</module>
         <module>spring-all</module>
         <module>spring-quartz</module>
+        <module>spring-websocket</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

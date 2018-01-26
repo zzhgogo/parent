@@ -21,10 +21,12 @@ import java.util.Properties;
  * Time:  2017/9/28 15:31
  * Description:
  */
+@SuppressWarnings("ALL")
 public class MyStringTest {
 
+
     @Test
-    public void IOU() throws Exception{
+    public void iuo() throws Exception{
         List<String> lines = new ArrayList<>();
         for (int i = 0 ; i < 100000 ; i++){
             lines.add("非凡之星-"+i);
@@ -44,7 +46,7 @@ public class MyStringTest {
 
     }
     @Test
-    public void STR() throws Exception{
+    public void str() throws Exception{
         
 //        System.out.println(StringUtils.isBlank(""));
 //        System.out.println(StringUtils.isBlank(null));
@@ -94,7 +96,8 @@ public class MyStringTest {
 
     @Test
     public void md5(){
-        String str  = "abcd"; //待加密字符串
+        //待加密字符串
+        String str  = "abcd";
 
         //1、MD5加密
         String md5Str = DigestUtils.md5Hex(str);
