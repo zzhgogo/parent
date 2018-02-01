@@ -3,11 +3,8 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
     <display-name>Archetype Created Web Application</display-name>
-    <!-- 加载Spring配置文件 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:application.xml</param-value>
-    </context-param>
+
+
 
     <!-- 字符集 过滤器 -->
     <filter>
@@ -27,11 +24,18 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- 加载Spring配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:application.xml</param-value>
+    </context-param>
+
     <!-- Spring监听器 -->
     <listener>
         <description>Spring监听器</description>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
     <!-- 防止Spring内存溢出监听器 -->
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
