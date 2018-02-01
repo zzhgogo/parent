@@ -19,6 +19,7 @@
         <module>spring-websocket</module>
         <module>spring-websocket</module>
         <module>spring-socket</module>
+        <module>spring-mybatisPlus</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>
