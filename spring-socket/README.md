@@ -1,9 +1,4 @@
-# WebSocketChat
-Real-time online chat system  
-websocket + Spring mvc + MyBatis  
+# springMvcWebSocket
+SpringMvc + WebSocket全双工通信
 
-more: http://tianle.me/2015/12/17/spring-websocket%E5%BC%80%E5%8F%91/
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/zhangtianle/websocketchat/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+博客(http://blog.csdn.net/w1054993544/article/details/51517109)
