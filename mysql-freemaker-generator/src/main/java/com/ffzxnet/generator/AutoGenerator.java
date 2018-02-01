@@ -527,7 +527,7 @@ public final class AutoGenerator {
             //从文件或jar包中获取模板
             /**
              //2.设置模板文件目录
-             cfg.setDirectoryForTemplateLoading(new File(getPathFromPackageName("src.test.java."+config.getPackageName()+".generator")));
+             cfg.setDirectoryForTemplateLoading(new File(getPathFromPackageName("src.test.java."+db.getPackageName()+".generator")));
              //2.模板在jar包文件中
              cfg.setClassForTemplateLoading(AutoGenerator.class, "");
              //获取模板（template）

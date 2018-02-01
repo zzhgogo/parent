@@ -1,7 +1,7 @@
-package com.zzh.config;
+package com.zzh.db;
 
 public enum DBTypeEnum {
-    one("dataSource_one"),two("dataSource_two");
+    one("dataSource_one"), two("dataSource_two");
     private String value;
 
     DBTypeEnum(String value) {

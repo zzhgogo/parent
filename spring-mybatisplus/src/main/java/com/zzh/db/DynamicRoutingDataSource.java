@@ -1,4 +1,4 @@
-package com.zzh.config;
+package com.zzh.db;
 
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
