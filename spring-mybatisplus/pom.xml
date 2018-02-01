@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>spring-mybatisPlus</artifactId>
     <packaging>war</packaging>
-    <name>spring-mybatisPlus Maven Webapp</name>
+    <name>spring-mybatisplus</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -213,6 +213,6 @@
     </dependencies>
     
     <build>
-        <finalName>spring-mybatisPlus</finalName>
+        <finalName>spring-mybatisplus</finalName>
     </build>
 </project>

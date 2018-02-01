@@ -15,9 +15,6 @@
         <module>demo</module>
         <module>spring-all</module>
         <module>spring-quartz</module>
-        <module>spring-websocket</module>
-        <module>spring-websocket</module>
-        <module>spring-websocket</module>
         <module>spring-socket</module>
         <module>spring-mybatisPlus</module>
     </modules>
