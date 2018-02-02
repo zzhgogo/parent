@@ -4,8 +4,6 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
-
-
     <!-- 字符集 过滤器 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -61,5 +59,9 @@
     <session-config>
         <session-timeout>15</session-timeout>
     </session-config>
+    
+    <welcome-file-list>
+        <welcome-file>/test/ftl</welcome-file>
+    </welcome-file-list>
 
 </web-app>

@@ -8,6 +8,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 
+    <description>Spring MVC 配置</description>
+
+
     <mvc:default-servlet-handler/>
 
     <!-- Controller包(自动注入) -->
@@ -51,10 +54,49 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- 对模型视图名称的解析,即在模型视图名称添加前后缀 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/pages/"/>
-        <property name="suffix" value=".jsp"/>
+
+
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!-- 视图资源位置 -->
+        <property name="templateLoaderPath" value="/WEB-INF/views/" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop><!-- 模板更新延时 -->
+                <prop key="locale">zh_CN</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="output_encoding">UTF-8</prop>
+                <prop key="template_exception_handler">rethrow</prop>
+                <prop key="number_format">#.##</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <!--<prop key="auto_import">common/spring.ftl as spring</prop>-->
+            </props>
+        </property>
+        <!-- 全局变量部分 -->
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="BasePath" value="/ctx" />
+                <!--<entry key="xml_escape" value-ref="fmXmlEscape" />-->
+                <!--<entry key="permission" value-ref="permissionDirective" />-->
+            </map>
+        </property>
     </bean>
+
+    <!-- 配置freeMarker视图解析器 -->
+    <bean id="ftlviewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <!-- 如果配置了这个节点，则视图必须是ftl，redirect等前缀都失效了 -->
+        <!-- <property name="viewNames" value="*.ftl"/> -->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".ftl" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+    </bean>
+
+
 
     <!-- 上传限制 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

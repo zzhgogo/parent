@@ -27,14 +27,11 @@
         <property name="initialSize" value="${druid.initialSize}" />
         <!-- 连接池最大使用连接数量 -->
         <property name="maxActive" value="${druid.maxActive}" />
-        <!-- 连接池最大空闲 -->
-        <property name="maxIdle" value="${druid.maxIdle}" />
         <!-- 连接池最小空闲 -->
         <property name="minIdle" value="${druid.minIdle}" />
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${druid.maxWait}" />
-        <!-- <property name="poolPreparedStatements" value="true" /> <property
-            name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
+
         <property name="validationQuery" value="${druid.validationQuery}" />
         <property name="testOnBorrow" value="${druid.testOnBorrow}" />
         <property name="testOnReturn" value="false" />
@@ -64,14 +61,10 @@
         <property name="initialSize" value="${druid.initialSize}" />
         <!-- 连接池最大使用连接数量 -->
         <property name="maxActive" value="${druid.maxActive}" />
-        <!-- 连接池最大空闲 -->
-        <property name="maxIdle" value="${druid.maxIdle}" />
         <!-- 连接池最小空闲 -->
         <property name="minIdle" value="${druid.minIdle}" />
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="${druid.maxWait}" />
-        <!-- <property name="poolPreparedStatements" value="true" /> <property
-            name="maxPoolPreparedStatementPerConnectionSize" value="33" /> -->
         <property name="validationQuery" value="${druid.validationQuery}" />
         <property name="testOnBorrow" value="${druid.testOnBorrow}" />
         <property name="testOnReturn" value="false" />
@@ -135,7 +128,7 @@
         <!-- <property name="dbColumnUnderline" value="true" /> -->
     </bean>
 
-    <!-- MyBatis 动态扫描  -->
+    <!-- 会自动将basePackage中配置的包路径下的所有带有@Mapper标注的接口生成代理类，实现数据访问 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.zzh.mapper"/>
     </bean>
@@ -145,9 +138,6 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    <!-- 会自动将basePackage中配置的包路径下的所有带有@Mapper标注的接口生成代理类，实现数据访问 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zzh.dao" />
-    </bean>
+
 
 </beans>
