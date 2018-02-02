@@ -19,13 +19,13 @@
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </filter-mapping>
 
-    <!-- 加载Spring配置文件 -->
+    <!-- Spring配置文件 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:application.xml</param-value>
+        <param-value>classpath:spring/application.xml, classpath:spring/spring-session.xml</param-value>
     </context-param>
 
     <!-- Spring监听器 -->
@@ -33,6 +33,18 @@
         <description>Spring监听器</description>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!-- Spring-Session -->
+
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>*.do</url-pattern>
+    </filter-mapping>
+    <!-- end -->
 
     <!-- 防止Spring内存溢出监听器 -->
     <listener>
@@ -52,16 +64,13 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
-    <!-- Session超时时间 -->
-    <session-config>
-        <session-timeout>15</session-timeout>
-    </session-config>
-    
+
+
     <welcome-file-list>
-        <welcome-file>/test/ftl</welcome-file>
+        <welcome-file>test/ftl.do</welcome-file>
     </welcome-file-list>
 
 </web-app>

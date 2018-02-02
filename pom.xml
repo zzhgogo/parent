@@ -16,7 +16,7 @@
         <module>spring-all</module>
         <module>spring-quartz</module>
         <module>spring-socket</module>
-        <module>spring-mybatisPlus</module>
+        <module>spring-mybatisplus</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

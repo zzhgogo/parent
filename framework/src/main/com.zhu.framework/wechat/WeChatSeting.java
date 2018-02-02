@@ -77,4 +77,6 @@ public class WeChatSeting {
         return jsonObject.getString("access_token");
     }
 
+
+
 }
