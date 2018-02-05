@@ -1,5 +1,6 @@
-package com.zzh.controller;
+package com.zzh.controller.test;
 
+import com.zzh.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;

@@ -4,6 +4,54 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+
+
+    <!-- Spring配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/spring-core.xml</param-value>
+    </context-param>
+
+    <!-- Spring监听器 -->
+    <listener>
+        <description>Spring监听器</description>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- Spring-Session redis -->
+    <filter>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSessionRepositoryFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- end -->
+
+    <!-- 防止Spring内存溢出监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+    <!-- end -->
+
+    <!-- Spring MVC -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <description>SpringMVC</description>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <!-- end -->
+
     <!-- 字符集 过滤器 -->
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -19,58 +67,14 @@
     </filter>
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
-    </filter-mapping>
-
-    <!-- Spring配置文件 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/application.xml, classpath:spring/spring-session.xml</param-value>
-    </context-param>
-
-    <!-- Spring监听器 -->
-    <listener>
-        <description>Spring监听器</description>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <!-- Spring-Session -->
-
-    <filter>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>springSessionRepositoryFilter</filter-name>
-        <url-pattern>*.do</url-pattern>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- end -->
-
-    <!-- 防止Spring内存溢出监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
-
-    <!-- Spring MVC -->
-    <servlet>
-        <servlet-name>SpringMVC</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <description>SpringMVC</description>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/spring-mvc.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SpringMVC</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
 
 
 
     <welcome-file-list>
-        <welcome-file>test/ftl.do</welcome-file>
+        <welcome-file>test/ftl</welcome-file>
     </welcome-file-list>
 
 </web-app>

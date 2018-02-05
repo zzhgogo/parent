@@ -12,10 +12,12 @@
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>5.0.0.RELEASE</spring.version>
+        <!--<spring.version>5.0.0.RELEASE</spring.version>-->
+        <!--<spring.version>4.3.6.RELEASE</spring.version>-->
+        <spring.version>4.3.7.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
         <druid.version>1.1.0</druid.version>
-        <fastjson.version>1.2.8</fastjson.version>
+        <fastjson.version>1.2.15</fastjson.version>
         <mybaitsplus.version>2.1.8</mybaitsplus.version>
         <mysql.version>5.1.38</mysql.version>
         <log4j.version>1.2.17</log4j.version>
@@ -23,6 +25,8 @@
         <aspectjweaver.version>1.8.8</aspectjweaver.version>
         <fileupload.version>1.3.1</fileupload.version>
         <jstl.version>1.2</jstl.version>
+        <swagger2.version>2.6.1</swagger2.version>
+        <jackjson.version>2.6.5</jackjson.version>
     </properties>
 
     <dependencies>
@@ -230,6 +234,45 @@
             <version>1.7.25</version>
         </dependency>
         <!-- end -->
+
+        <!-- swagger2 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <!-- end -->
+
+        <!-- jackJson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackjson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackjson.version}</version>
+        </dependency>
+        <!-- end -->
+
+
+        <!-- 它提供了大量相关的应用类，集合，多线程，比较，字符串，输入输出，缓存，网络，原生类型，数学，反射等等 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
 
 
     </dependencies>

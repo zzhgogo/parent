@@ -12,8 +12,7 @@
     <!-- 开启自动切面代理 -->
     <aop:aspectj-autoproxy />
     <context:component-scan base-package="com.zzh">
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.stereotype.Controller" />
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
     </context:component-scan>
 
     <!-- #################################################################### -->
@@ -36,5 +35,6 @@
 
     <import resource="classpath:spring/spring-mybatis.xml"/>
     <import resource="classpath:spring/spring-redis.xml"/>
+    <import resource="classpath:spring/spring-session.xml"/>
 
 </beans>

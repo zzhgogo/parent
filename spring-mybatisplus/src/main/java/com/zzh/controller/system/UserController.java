@@ -1,7 +1,6 @@
-package com.zzh.controller;
+package com.zzh.controller.system;
 
-import com.zzh.db.DBTypeEnum;
-import com.zzh.db.DbContextHolder;
+import com.zzh.controller.BaseController;
 import com.zzh.model.enums.TypeEnum;
 import com.zzh.model.system.User;
 import com.zzh.service.IUserService;
