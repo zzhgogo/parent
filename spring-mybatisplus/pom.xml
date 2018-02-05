@@ -27,6 +27,7 @@
         <jstl.version>1.2</jstl.version>
         <swagger2.version>2.6.1</swagger2.version>
         <jackjson.version>2.6.5</jackjson.version>
+        <jetty.port>8000</jetty.port>
     </properties>
 
     <dependencies>
@@ -266,7 +267,6 @@
         </dependency>
         <!-- end -->
 
-
         <!-- 它提供了大量相关的应用类，集合，多线程，比较，字符串，输入输出，缓存，网络，原生类型，数学，反射等等 -->
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -274,10 +274,27 @@
             <version>18.0</version>
         </dependency>
 
-
     </dependencies>
     
     <build>
         <finalName>spring-mybatisplus</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.8.v20150217</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/${project.build.finalName}</contextPath>
+                    </webApp>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>${jetty.port}</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
