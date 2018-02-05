@@ -1,5 +1,6 @@
 package com.zzh.controller.system;
 
+import com.zzh.consts.ResultConstant;
 import com.zzh.controller.BaseController;
 import com.zzh.model.enums.TypeEnum;
 import com.zzh.model.system.User;
@@ -55,16 +56,16 @@ public class UserController extends BaseController {
     public Object save(User user) {
         user.setType(TypeEnum.DISABLED);
         if (user.getId() == null) {
-            return userService.insert(user) ? renderSuccess("添加成功") : renderError("添加失败");
+            return userService.insert(user) ? render(ResultConstant.SUCCESS) : render(ResultConstant.FAILED);
         } else {
-            return userService.updateById(user) ? renderSuccess("修改成功") : renderError("修改失败");
+            return userService.updateById(user) ? render(ResultConstant.SUCCESS) : render(ResultConstant.FAILED);
         }
     }
 
     @ResponseBody
     @RequestMapping("/delete")
     public Object delete(@RequestParam(value = "id", required = false) Long id) {
-        return userService.deleteById(id) ? renderSuccess("删除成功") : renderError("删除失败");
+        return userService.deleteById(id) ? render(ResultConstant.SUCCESS) : render(ResultConstant.FAILED);
     }
 
 

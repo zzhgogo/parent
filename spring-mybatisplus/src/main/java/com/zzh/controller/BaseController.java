@@ -1,7 +1,14 @@
 package com.zzh.controller;
 
 
-import com.zzh.comom.JsonResult;
+import com.zzh.comom.ResultDto;
+import com.zzh.consts.ResultConstant;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Author: D.Yang
@@ -12,62 +19,46 @@ import com.zzh.comom.JsonResult;
  */
 public class BaseController {
     /**
-     * 渲染失败数据
+     * 获取request
      *
-     * @return result
+     * @return
      */
-    protected JsonResult renderError() {
-        JsonResult result = new JsonResult();
-        result.setSuccess(false);
-        result.setStatus("500");
-        return result;
+    protected HttpServletRequest getRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
+
+    /**
+     * 获取response
+     *
+     * @return
+     */
+    protected HttpServletResponse getResponse() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
     /**
-     * 渲染失败数据（带消息）
+     * 获取session
      *
-     * @param msg 需要返回的消息
-     * @return result
+     * @return
      */
-    protected JsonResult renderError(String msg) {
-        JsonResult result = renderError();
-        result.setMsg(msg);
-        return result;
+    protected HttpSession getSession() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getSession();
     }
 
     /**
-     * 渲染成功数据
-     *
-     * @return result
+     * 渲染数据
+     * @return
      */
-    protected JsonResult renderSuccess() {
-        JsonResult result = new JsonResult();
-        result.setSuccess(true);
-        result.setStatus("200");
-        return result;
+    protected ResultDto render(ResultConstant result){
+        return new ResultDto(result);
     }
 
     /**
-     * 渲染成功数据（带信息）
-     *
-     * @param msg 需要返回的信息
-     * @return result
+     * 渲染数据
+     * @return
      */
-    protected JsonResult renderSuccess(String msg) {
-        JsonResult result = renderSuccess();
-        result.setMsg(msg);
-        return result;
-    }
-
-    /**
-     * 渲染成功数据（带数据）
-     *
-     * @param obj 需要返回的对象
-     * @return result
-     */
-    protected JsonResult renderSuccess(Object obj) {
-        JsonResult result = renderSuccess();
-        result.setObj(obj);
-        return result;
+    protected ResultDto render(ResultConstant result, Object data){
+        return new ResultDto(result, data);
     }
 }
