@@ -97,6 +97,15 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- end -->
+
+        <!--- spring session -->
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+            <version>1.3.1.RELEASE</version>
+        </dependency>
+        <!-- end -->
 
         <!-- AOP -->
         <dependency>
@@ -104,6 +113,7 @@
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectjweaver.version}</version>
         </dependency>
+        <!-- end -->
 
         <!-- FileUpload -->
         <dependency>
@@ -111,6 +121,8 @@
             <artifactId>commons-fileupload</artifactId>
             <version>${fileupload.version}</version>
         </dependency>
+        <!-- end -->
+
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -173,7 +185,7 @@
             <version>${fastjson.version}</version>
         </dependency>
 
-        <!-- Log -->
+        <!-- Log4j -->
         <!--<dependency>-->
             <!--<groupId>log4j</groupId>-->
             <!--<artifactId>log4j</artifactId>-->
@@ -189,58 +201,37 @@
             <!--<artifactId>slf4j-log4j12</artifactId>-->
             <!--<version>${slf4j.version}</version>-->
         <!--</dependency>-->
-        <!-- Logback -->
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+
+
+        <!-- logback 日志 -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.logback-extensions/logback-ext-spring -->
         <dependency>
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
             <version>0.1.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.slf4j/jcl-over-slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.25</version>
         </dependency>
-
-        <!-- redis cache related.....start -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.data</groupId>-->
-            <!--<artifactId>spring-data-redis</artifactId>-->
-            <!--<version>1.6.0.RELEASE</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>redis.clients</groupId>-->
-            <!--<artifactId>jedis</artifactId>-->
-            <!--<version>2.7.3</version>-->
-        <!--</dependency>-->
-        <!-- redis cache related.....end -->
-
-        <!--- spring session -->
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-data-redis</artifactId>
-            <version>1.3.1.RELEASE</version>
-        </dependency>
         <!-- end -->
+
+
     </dependencies>
     
     <build>

@@ -88,7 +88,7 @@
     <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描Mapping.xml文件 -->
-        <property name="mapperLocations" value="classpath:mapper/UserMapper.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
         <property name="configLocation" value="classpath:spring/mybatis-config.xml"/>
         <property name="typeAliasesPackage" value="com.zzh.model.*"/>
         <property name="typeEnumsPackage" value="com.zzh.model.enums"/>
