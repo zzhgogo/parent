@@ -26,7 +26,7 @@ public class MultiThreading {
         executorService.shutdown();
     }
     @Test
-    public void bb() throws ExecutionException, InterruptedException {
+    public void bb() throws Exception {
         ExecutorService executorService = Executors.newCachedThreadPool();
         List<Future<String>> futureList = Lists.newArrayList();
         for(int i = 0 ; i < 100 ; i++){
@@ -34,21 +34,20 @@ public class MultiThreading {
             Future<String> future = executorService.submit(new Callable<String>() {
                 @Override
                 public String call() throws Exception {
-                    Thread.sleep((long) Math.random()*10000);
+                    Thread.sleep((long) Math.random()*100);
                    // System.out.println(Thread.currentThread().getName());
                     return "Thread:"+t;
                 }
             });
             futureList.add(future);
         }
+//        shutdown() 方法在终止前允许执行以前提交的任务，
+//        shutdownNow() 方法阻止等待任务启动并试图停止当前正在执行的任务。在终止时执行程序没有任务在执行，也没有任务在等待执行，并且无法提交新任务。关闭未使用的 ExecutorService 以允许回收其资源。
         executorService.shutdown();
         for (Future<String> fs : futureList) {
-            try {
-                String result = fs.get();
-                System.out.println(result);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            String result = fs.get();
+            System.out.println(result);
         }
     }
 }
+//start(),sleep(),wait(),yield(),join()

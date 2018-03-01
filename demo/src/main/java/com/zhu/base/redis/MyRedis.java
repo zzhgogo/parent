@@ -3,10 +3,10 @@ package com.zhu.base.redis;
 
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisSentinelPool;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,7 +66,7 @@ public class MyRedis {
      */
     @Test
     public void testMap(){
-        Jedis jedis = new Jedis("127.0.0.1");
+        Jedis jedis = new Jedis("127.0.0.1",6379);
         Map<String, String> map = new HashMap<>();
         map.put("name", "朱昊");
         map.put("age", "23");
@@ -80,6 +80,53 @@ public class MyRedis {
             System.out.println("userInfo["+entry.getKey()+":"+entry.getValue()+"]");
         }
 
+    }
+
+    @Test
+    public void sent(){
+        Jedis jedis  = new Jedis("192.168.8.128",6301);
+        jedis.auth("123456");
+        //查看服务是否运行
+        System.out.println("服务正在运行: "+jedis.ping());
+    }
+
+    //测试哨兵
+    @Test
+    public  void tt() throws Exception {
+        // TODO Auto-generated method stub
+
+        Set<String> sentinels = new HashSet<String>();
+        sentinels.add("192.168.8.128:26301");
+        sentinels.add("192.168.8.128:26302");
+        sentinels.add("192.168.8.128:26303");
+        JedisSentinelPool jedisSentinelPool = new JedisSentinelPool("mymaster", sentinels);
+        Jedis jedis = null;
+
+        while (true) {
+            Thread.sleep(1000);
+
+            try {
+                jedis = jedisSentinelPool.getResource();
+
+                Date now = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                String format_now = dateFormat.format(now);
+
+                jedis.set("hello", "world");
+                String value = jedis.get("hello");
+                System.out.println(format_now + ' ' + value);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            } finally {
+                if (jedis != null)
+                    try {
+                        jedis.close();
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+            }
+        }
 
     }
 }
