@@ -90,6 +90,16 @@ public class MyRedis {
         System.out.println("服务正在运行: "+jedis.ping());
     }
 
+    public void sentinelTest(){
+        Set<String> sentinels = new HashSet<>();
+        sentinels.add("192.168.2.195:26301");
+        sentinels.add("192.168.2.194:26302");
+        JedisSentinelPool jedissentinelPool = new JedisSentinelPool("mymaster", sentinels);
+        Jedis jedis = null;
+        while(true){
+
+        }
+    }
     //测试哨兵
     @Test
     public  void tt() throws Exception {

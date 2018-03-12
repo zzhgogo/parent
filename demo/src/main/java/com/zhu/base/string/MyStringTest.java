@@ -117,4 +117,41 @@ public class MyStringTest {
 
     }
 
+    @Test
+    public void math(){
+        System.out.println(Math.ceil(1.2));
+        System.out.println(Math.round(1.2));
+        System.out.println(Math.floor(1.9));
+    }
+
+    @Test
+    public void t6(){
+        String str  = "aaaccd";
+        char[] arr = str.toCharArray();
+        char temp = ' ';
+        int count = 1;
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0 ; i < arr.length ; i++){
+            if(i==0){
+                temp = arr[0];
+            }else {
+                if(temp==arr[i]){
+                    count++;
+                }else {
+                    stringBuffer.append(temp+""+count);
+                    temp = arr[i];
+                    count = 1;
+                }
+            }
+            if(arr.length==1){
+                stringBuffer.append(temp+""+count);
+            } else if(arr.length==i+1){
+                stringBuffer.append(temp+""+count);
+            }
+
+        }
+        System.out.println(stringBuffer);
+    }
+
+
 }

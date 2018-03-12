@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 参考： http://blog.csdn.net/u010987379/article/details/52152925 -->
+
+    <!-- 被代理对象 -->
+    <bean id="math" class="com.zzh.aop.Math"></bean>
+
+    <!-- 通知 -->
+    <bean id="advices" class="com.zzh.aop.Advices"></bean>
+
+    <!-- aop配置 -->
+    <aop:config proxy-target-class="true">
+        <!--切面 -->
+        <aop:aspect ref="advices">
+
+            <!-- 切点 -->
+            <aop:pointcut expression="execution(* com.zzh.aop.Math.*(..))" id="pointcut1"/>
+
+            <!--连接通知方法与切点 -->
+
+            <!--<aop:before method="before" pointcut-ref="pointcut1" />-->
+
+            <!--<aop:after method="after" pointcut-ref="pointcut1"/>-->
+
+            <aop:around method="around" pointcut-ref="pointcut1"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
