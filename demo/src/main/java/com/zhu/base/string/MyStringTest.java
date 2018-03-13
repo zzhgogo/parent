@@ -1,6 +1,7 @@
 package com.zhu.base.string;
 
 import com.zhu.base.property.Mypropetry;
+import com.zhu.base.reflect.Person;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FileUtils;
@@ -10,9 +11,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 
 /**
@@ -97,7 +96,7 @@ public class MyStringTest {
     @Test
     public void md5(){
         //待加密字符串
-        String str  = "abcd";
+        String str  = "abcdefghi";
 
         //1、MD5加密
         String md5Str = DigestUtils.md5Hex(str);
@@ -152,6 +151,14 @@ public class MyStringTest {
         }
         System.out.println(stringBuffer);
     }
+
+    @Test
+    public void t7(){
+        System.out.println( new Person() instanceof Object);
+        Map<Person ,Person> hMap = new HashMap<>();
+    }
+
+
 
 
 }
