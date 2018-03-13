@@ -12,11 +12,11 @@ import java.lang.annotation.*;
 @Documented
 public @interface FruitProvider {
 
-    public String address() default "湖北";
+    String address() default "湖北";
 
-    public int id() default -1;
+    int id() default -1;
 
-    public String name() default "非凡之星";
+    String name() default "非凡之星";
 
 
 }
