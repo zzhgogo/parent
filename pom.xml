@@ -18,6 +18,7 @@
         <module>spring-socket</module>
         <module>spring-mybatisplus</module>
         <module>spring-aop</module>
+        <module>selenium-spider</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

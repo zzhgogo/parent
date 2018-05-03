@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,6 +49,28 @@ public class MultiThreading {
             String result = fs.get();
             System.out.println(result);
         }
+    }
+
+    // 参考 http://www.jcodecraeer.com/a/chengxusheji/java/2017/1226/9011.html
+    @Test
+    public void t1() throws Exception {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        List<Integer> list = Lists.newArrayList();
+        list.add(1); list.add(2);
+        List<CompletableFuture<Integer>> futures = list.stream().map( m -> CompletableFuture.supplyAsync(()->{return m;}, executorService)).collect(Collectors.toList());
+        List<Integer> results = futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        System.out.print(results);
+
+    }
+    // 参考 http://www.jcodecraeer.com/a/chengxusheji/java/2017/1226/9011.html
+    @Test
+    public void t2(){
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(35, 150, 200, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(100));
+        List<Integer> list = Lists.newArrayList();
+        list.add(1); list.add(2);
+        List<CompletableFuture<Integer>> futures = list.stream().map( m -> CompletableFuture.supplyAsync(()->{return m;}, threadPoolExecutor)).collect(Collectors.toList());
+        List<Integer> results = futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+        System.out.print(results);
     }
 }
 //start(),sleep(),wait(),yield(),join()
