@@ -1,6 +1,7 @@
 package com.zhu.base.thread;
 
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Test;
 
 import java.util.List;
@@ -71,6 +72,18 @@ public class MultiThreading {
         List<CompletableFuture<Integer>> futures = list.stream().map( m -> CompletableFuture.supplyAsync(()->{return m;}, threadPoolExecutor)).collect(Collectors.toList());
         List<Integer> results = futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
         System.out.print(results);
+    }
+
+    @Test
+    public void t3(){
+        StopWatch watch=new StopWatch();
+        watch.start();
+        try {
+            Thread.sleep(3*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.print(watch.getTime());
     }
 }
 //start(),sleep(),wait(),yield(),join()
