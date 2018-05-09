@@ -7,6 +7,14 @@
 <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript">
 	/*<![CDATA[*/
+    //用于生成uuid
+    function S4() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+
+    function guid() {
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+    }
 
 	var stompClient = null;
 

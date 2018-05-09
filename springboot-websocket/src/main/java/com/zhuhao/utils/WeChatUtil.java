@@ -1,8 +1,7 @@
 package com.zhuhao.utils;
 
-import com.zhuhao.weixin.message.TextMessage;
-import com.zhuhao.weixin.message.WeixinMessage;
 
+import com.zhuhao.weixin.message.WeixinMessage;
 import javax.xml.bind.*;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
