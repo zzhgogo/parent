@@ -1,101 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>websocket</title>
-    <script src="http://cdn.bootcss.com/sockjs-client/1.1.1/sockjs.min.js"></script>
-    <script src="http://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
-    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
+<title>玩转spring boot——websocket</title>
+<script src="//cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
+<script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+<script type="text/javascript">
+    var websocket = new SockJS("/webServer");
+    var stompClient = Stomp.over(websocket);
 
-        //用于生成uuid
-        function S4() {
-            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-        }
-
-        function guid() {
-            return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-        }
-
-        $(document).ready(function () {
-            connect();
+    //建立websocket连接
+    function openWs(){
+        stompClient.connect({}, function(frame) {
+            stompClient.subscribe('/topic/message',  function(data) { //订阅消息
+                console.log("收到topic消息："+data.body);//body中为具体消息内容
+            });
+            stompClient.subscribe('/user/message', function(message){
+                console.log("收到session消息："+message.body);//body中为具体消息内容
+            });
         });
+    }
+    //关闭连接
+    function wsClose() {
+        websocket.close();
+    }
 
-        var stompClient = null;
-
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
-            document.getElementById('response').innerHTML = '';
-        }
-
-        //this line.
-        function connect() {
-            var userid = document.getElementById('name').value;
-            var socket = new SockJS("/my-websocket");
-            stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                setConnected(true);
-                console.log('Connected: ' + frame);
-                // stompClient.subscribe('/topic/greetings', function (greeting) {
-                //     showGreeting(JSON.parse(greeting.body).content);
-                // });
-
-                stompClient.subscribe('/user/' + userid + '/message', function (greeting) {
-                    alert(JSON.parse(greeting.body).content);
-                    showGreeting(JSON.parse(greeting.body).content);
-                });
-            });
-        }
-
-        function sendName() {
-            var name = document.getElementById('name').value;
-            stompClient.send("/app/hello", {atytopic: "greetings"}, JSON.stringify({'name': name}));
-        }
-
-        function connectAny() {
-            var socket = new SockJS("/my-websocket");
-            stompClient = Stomp.over(socket);
-            stompClient.connect({}, function (frame) {
-                setConnected(true);
-                console.log('Connected: ' + frame);
-                stompClient.subscribe('/topic/feed', function (data) {
-                    alert(data);
-                    //showGreeting(JSON.parse(greeting.body).content);
-                });
-            });
-        }
-
-        function disconnect() {
-            if (stompClient != null) {
-                stompClient.disconnect();
-            }
-            setConnected(false);
-            console.log("Disconnected");
-        }
-
-
-        function showGreeting(message) {
-            var response = document.getElementById('response');
-            var p = document.createElement('p');
-            p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(message));
-            response.appendChild(p);
-        }
-    </script>
+    function sendws() {
+        stompClient.send("/app/message", {}, JSON.stringify({
+            name: "nane",
+            msg: "发送的消息aaa"
+        }));
+    }
+    openWs();
+</script>
 </head>
 <body>
-<div>
-    <div>
-        <button id="connect" onclick="connect();">Connect</button>
-        <button id="connectAny" onclick="connectAny();">ConnectAny</button>
-        <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
-    </div>
-    <div id="conversationDiv">
-        <label>What is your name?</label><input type="text" id="name" value="123456"/>
-        <button id="sendName" onclick="sendName();">Send</button>
-        <p id="response"></p>
-    </div>
-</div>
+<input value="openWs" id="sendws" type="button" onclick="sendws()"/>
 </body>
 </html>

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @EnableScheduling
-public class App {
+public class WebSocketController {
 
 	@Autowired
 	private SimpMessagingTemplate messagingTemplate;
