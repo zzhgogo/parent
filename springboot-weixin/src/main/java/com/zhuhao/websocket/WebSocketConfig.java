@@ -13,20 +13,20 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 //参考：https://segmentfault.com/a/1190000009038991#articleHeader1，https://www.cnblogs.com/GoodHelper/p/7078381.html
 //https://www.cnblogs.com/nevermorewang/p/7274217.html
 //https://blog.csdn.net/yingxiake/article/details/51213060
-@Configuration
-@EnableWebSocketMessageBroker
-public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
-
-	@Override
-	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/topic", "/user");
-		config.setApplicationDestinationPrefixes("/app");
-		config.setUserDestinationPrefix("/user");
-	}
-
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/my-websocket").setAllowedOrigins("*").withSockJS();
-	}
-
-}
+//@Configuration
+//@EnableWebSocketMessageBroker
+//public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
+//
+//	@Override
+//	public void configureMessageBroker(MessageBrokerRegistry config) {
+//		config.enableSimpleBroker("/topic", "/user");
+//		config.setApplicationDestinationPrefixes("/app");
+//		config.setUserDestinationPrefix("/user");
+//	}
+//
+//	@Override
+//	public void registerStompEndpoints(StompEndpointRegistry registry) {
+//		registry.addEndpoint("/my-websocket").setAllowedOrigins("*").withSockJS();
+//	}
+//
+//}
