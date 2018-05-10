@@ -1,5 +1,8 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,36 +19,53 @@ import java.security.Principal;
 
 @Controller
 public class WebSocketController {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebSocketController.class);
+
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @GetMapping("/1")
+    @GetMapping("/2")
     public String index1() {
-        return "index";
+        return "index2";
     }
 
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/hello")//会把方法的返回值广播到指定主题（“主题”这个词并不合适）
-    public Object toTopic(SocketMessageVo msg) {
-        System.out.println(msg.getName()+","+msg.getMsg());
-        //this.simpMessagingTemplate.convertAndSend("/topic/hello",msg.getName()+","+msg.getMsg());
+    @MessageMapping("/hello1")
+    public void toTopic1(SocketMessageVo msg) {
+        logger.info("接收路径[/app/hello1]:{} 订阅路径[/topic/hello1]：{}", JSON.toJSON(msg), JSON.toJSON(msg));
+        this.simpMessagingTemplate.convertAndSend("/topic/hello1",msg.getName()+","+msg.getMsg());
+    }
+
+    //与toTop1()功能相同
+    @MessageMapping("/hello2")
+    @SendTo("/topic/hello2")
+    public Object toTopic2(SocketMessageVo msg) {
+        logger.info("接收路径[/app/hello2]:{} 订阅路径[/topic/hello2]：{}", JSON.toJSON(msg), JSON.toJSON(msg));
         return msg;
     }
 
-    @MessageMapping("/message")
-    @SendToUser("/message")//把返回值发到指定队列（“队列”实际不是队列，而是跟上面“主题”类似的东西，只是spring在SendTo的基础上加了用户的内容而已）
+    @MessageMapping("/message1")
+    @SendToUser("/message1")
     public Object toUser(SocketMessageVo msg) {
-        System.out.println(msg.getName()+","+msg.getMsg());
+        logger.info("接收路径[/app/message1]:{} 订阅路径[/topic/message1]：{}", JSON.toJSON(msg), JSON.toJSON(msg));
         //this.simpMessagingTemplate.convertAndSendToUser("123","/message",msg.getName()+msg.getMsg());
         return msg;
     }
 
+//    @MessageMapping("/message2")
+//    public void toUser2(SocketMessageVo msg) {
+//        logger.info("接收路径[/app/message2]:{} 订阅路径[/user/123456/message2]：{}", JSON.toJSON(msg), JSON.toJSON(msg));
+//        this.simpMessagingTemplate.convertAndSendToUser("123456","/message",msg.getName()+msg.getMsg());
+//    }
+
     @RequestMapping("/sendMsg")
     @ResponseBody
     public String sendMsg(HttpSession session){
-        System.out.println("测试发送消息：随机消息" +session.getId());
-        this.simpMessagingTemplate.convertAndSendToUser("123","/message","后台具体用户消息");
+        SocketMessageVo msg = new SocketMessageVo();msg.setName("sessionId");msg.setMsg(session.getId());
+        logger.info("测试发送消息：随机消息" +session.getId());
+        // 发送到 /user/123456/message2 订阅路径当中
+        simpMessagingTemplate.convertAndSendToUser("123456","/message2", JSON.toJSONString(msg));//
         return "success";
     }
 }

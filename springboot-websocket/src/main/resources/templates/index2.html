@@ -6,35 +6,90 @@
 <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript">
+
     var websocket = new SockJS("/webServer");
     var stompClient = Stomp.over(websocket);
-
     //建立websocket连接
     function openWs(){
         stompClient.connect({}, function(frame) {
-            stompClient.subscribe('/topic/message',  function(data) { //订阅消息
-                console.log("收到topic消息："+data.body);//body中为具体消息内容
-            });
-            stompClient.subscribe('/user/message', function(message){
-                console.log("收到session消息："+message.body);//body中为具体消息内容
+            stompClient.subscribe('/topic/hello1',  function(data) { //订阅消息
+                console.log("收到消息："+data.body);//body中为具体消息内容
             });
         });
     }
     //关闭连接
     function wsClose() {
-        websocket.close();
+        stompClient2.disconnect();
     }
-
     function sendws() {
-        stompClient.send("/app/message", {}, JSON.stringify({
-            name: "nane",
-            msg: "发送的消息aaa"
+        stompClient.send("/app/hello1", {}, JSON.stringify({
+            name: "世界",
+            msg: "你好"
         }));
     }
-    openWs();
+// ################################################################################################################################################
+    var websocket2 = new SockJS("/webServer");
+    var stompClient2 = Stomp.over(websocket2);
+    //建立websocket连接
+    function openWs2(){
+        stompClient2.connect({}, function(frame) {
+            stompClient2.subscribe('/topic/hello2',  function(data) { //订阅消息
+                console.log("收到消息："+data.body);//body中为具体消息内容
+            });
+        });
+    }
+    //关闭连接
+    function wsClose2() {
+        stompClient2.disconnect();
+    }
+    function sendws2() {
+        stompClient2.send("/app/hello2", {}, JSON.stringify({
+            name: "世界",
+            msg: "你好"
+        }));
+    }
+// ################################################################################################################################################
+    var websocket3 = new SockJS("/webServer");
+    var stompClient3 = Stomp.over(websocket3);
+    //建立websocket连接
+    function openWs3(){
+        stompClient3.connect({}, function(frame) {
+            stompClient3.subscribe('/user/123456/message2', function(message){
+                console.log("收到消息："+message.body);//body中为具体消息内容
+            });
+        });
+    }
+    //关闭连接
+    function wsClose3() {
+        stompClient3.disconnect();
+    }
+    function sendws3() {
+        // stompClient3.send("/user/123456/message2", {}, JSON.stringify({
+        //     name: "世界",
+        //     msg: "你好"
+        // }));
+    }
+    openWs3();
 </script>
 </head>
 <body>
-<input value="openWs" id="sendws" type="button" onclick="sendws()"/>
+<div>
+    <span>广播模式1：</span>
+    <input value="连接" type="button" onclick="openWs()"/>
+    <input value="关闭" type="button" onclick="wsClose()"/>
+    <input value="发送" type="button" onclick="sendws()"/><br/>
+</div>
+<div>
+    <span>广播模式2：</span>
+    <input value="连接" type="button" onclick="openWs2()"/>
+    <input value="关闭" type="button" onclick="wsClose2()"/>
+    <input value="发送" type="button" onclick="sendws2()"/><br/>
+</div>
+<div>
+    <span>点对点模式1：</span>
+    <input value="连接" type="button" onclick="openWs3()"/>
+    <input value="关闭" type="button" onclick="wsClose3()"/>
+    <input value="发送" type="button" onclick="sendws3()"/><br/>
+</div>
 </body>
 </html>
