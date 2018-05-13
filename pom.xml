@@ -19,6 +19,7 @@
         <module>spring-mybatisplus</module>
         <module>spring-aop</module>
         <module>selenium-spider</module>
+        <module>elasticsearch</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>
