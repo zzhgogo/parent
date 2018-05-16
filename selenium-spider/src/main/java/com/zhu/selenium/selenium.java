@@ -9,8 +9,9 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class selenium {
 
+    // https://sites.google.com/a/chromium.org/chromedriver/downloads
     public static void main(String[] args){
-        System.setProperty("phantomjs.binary.path", "/Users/zhuhao/Downloads/phantomjs-2.1-2.1-macosx/bin/phantomjs");
+        System.setProperty("phantomjs.binary.path", "/Users/zhuhao/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs");
         WebDriver webDriver = new PhantomJSDriver();
         //WebDriver webDriver = new ChromeDriver();
         webDriver.get("http://daikuan.51kanong.com/Home/Daikuan/lists.html");
