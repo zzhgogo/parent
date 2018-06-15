@@ -39,7 +39,6 @@ public class MyStringTest {
         IOUtils.writeLines(lines,  null, new FileOutputStream(path));
         FileInputStream fileInputStream = new FileInputStream(path);
         List<String> list = IOUtils.readLines(fileInputStream);
-
         FileUtils.writeLines(file, lines);
 
         System.out.print(list);

@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -105,5 +106,11 @@ public class MyTest {
         String str = "50|";
         Integer jobNum = Integer.valueOf(str.substring(0, str.indexOf("|")));
         System.out.println(jobNum);
+    }
+
+    @Test
+    public void t5(){
+        String[] _ids = "1ehwYAKSlD_1objCZMpff_bFpbxlprAz3".split("_");
+        List<String> articleIds = Arrays.asList(_ids);
     }
 }
