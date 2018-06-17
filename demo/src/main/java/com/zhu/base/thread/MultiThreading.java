@@ -85,5 +85,11 @@ public class MultiThreading {
         }
         System.out.print(watch.getTime());
     }
+
+    @Test
+    public void t4(){
+       String ids = "123_136";
+
+    }
 }
 //start(),sleep(),wait(),yield(),join()

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -38,7 +39,6 @@ public class MyStringTest {
         IOUtils.writeLines(lines,  null, new FileOutputStream(path));
         FileInputStream fileInputStream = new FileInputStream(path);
         List<String> list = IOUtils.readLines(fileInputStream);
-
         FileUtils.writeLines(file, lines);
 
         System.out.print(list);
@@ -158,6 +158,20 @@ public class MyStringTest {
         Map<Person ,Person> hMap = new HashMap<>();
     }
 
+    @Test
+    public void t8(){
+        int year = 2018;
+        int week = 18;
+        Calendar c=Calendar.getInstance();
+        c.set(Calendar.YEAR, 2018);
+        c.set(Calendar.WEEK_OF_YEAR, 26);
+        c.set(Calendar.HOUR, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MINUTE, 0);
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss ");
+        String time = formatter.format(c.getTime());
+        System.out.println(time);
+    }
 
 
 

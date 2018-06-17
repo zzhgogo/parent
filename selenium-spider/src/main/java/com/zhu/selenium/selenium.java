@@ -9,11 +9,14 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
 public class selenium {
 
+    // https://sites.google.com/a/chromium.org/chromedriver/downloads
     public static void main(String[] args){
-        System.setProperty("phantomjs.binary.path", "/Users/zhuhao/Downloads/phantomjs-2.1-2.1-macosx/bin/phantomjs");
-        System.setProperty("webdriver.chrome.driver","c:/chromedriver2.38.exe");//chromedriver服务地址
-       // WebDriver webDriver = new PhantomJSDriver();
-        WebDriver webDriver = new ChromeDriver();
+        System.setProperty("webdriver.firefox.bin", "/Users/zhuhao/firefox-sdk/bin/Firefox");
+        System.setProperty("webdriver.chrome.driver", "/usr/local/chromedriver/chromedriver");
+        System.setProperty("phantomjs.binary.path", "/Users/zhuhao/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs");
+        //WebDriver webDriver = new PhantomJSDriver();
+        //WebDriver webDriver = new ChromeDriver();
+        WebDriver webDriver = new FirefoxDriver();
         webDriver.get("http://daikuan.51kanong.com/Home/Daikuan/lists.html");
         WebElement webElement = webDriver.findElement(By.xpath("/html"));
         System.out.println(webElement.getAttribute("outerHTML"));
