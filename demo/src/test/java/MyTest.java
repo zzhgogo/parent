@@ -10,10 +10,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -112,5 +110,11 @@ public class MyTest {
     public void t5(){
         String[] _ids = "1ehwYAKSlD_1objCZMpff_bFpbxlprAz3".split("_");
         List<String> articleIds = Arrays.asList(_ids);
+    }
+
+    @Test
+    public void t6(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(format.format(new Date()));
     }
 }

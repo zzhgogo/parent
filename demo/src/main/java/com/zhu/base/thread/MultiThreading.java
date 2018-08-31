@@ -91,5 +91,26 @@ public class MultiThreading {
        String ids = "123_136";
 
     }
+
+    @Test
+    public void t5() {
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                // FUN1
+            }
+        });
+
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                // FUN2
+            }
+        });
+
+    }
 }
 //start(),sleep(),wait(),yield(),join()

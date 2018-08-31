@@ -16,7 +16,7 @@ import java.io.InputStream;
 @Component
 public class WeixinMessageDispatcher {
 
-    private final static Logger logger = LoggerFactory.getLogger(WxController.class);
+    private final static Logger logger = LoggerFactory.getLogger(WxControllerB.class);
 
 
     public String doDispatch(HttpServletRequest request) throws Exception{

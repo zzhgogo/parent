@@ -173,6 +173,39 @@ public class MyStringTest {
         System.out.println(time);
     }
 
+    @Test
+    public void t9(){
+        String s = ";:00594510=2609013500152=5801?";
+        s = s.replaceAll(";|:|=|\\?",",");
+        System.out.println(s);
+        String[] arr = s.split(",");
+        List<String> list = new ArrayList<>(Arrays.asList(arr));
+        //list.stream().forEach(System.out::println);
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()){
+            if(StringUtils.isBlank(iterator.next())){
+                iterator.remove();
+            }
+        }
+
+        list.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void t10(){
+        String introduce = "CFP认证理财师1";
+        introduce = introduce + ",";
+        introduce = introduce.replaceAll(",|，|、|\\?",",");
+        System.out.println(introduce.substring(0, introduce.indexOf(",")));
+    }
+
+    @Test
+    public void t11(){
+        long a = System.currentTimeMillis();
+        System.out.println(a/400);
+    }
+
+
 
 
 }
