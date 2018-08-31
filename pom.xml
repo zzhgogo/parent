@@ -20,6 +20,7 @@
         <module>spring-aop</module>
         <module>selenium-spider</module>
         <module>elasticsearch</module>
+        <module>sitemap</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>
