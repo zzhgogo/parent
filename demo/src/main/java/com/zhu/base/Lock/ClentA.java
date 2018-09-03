@@ -2,9 +2,6 @@ package com.zhu.base.Lock;
 
 import redis.clients.jedis.Jedis;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class ClentA {
 
     public static void main(String[] args) {
@@ -14,7 +11,7 @@ public class ClentA {
         String lock_key = "redis_lock_key_1";
         jedis.del(lock_key);
         jedis.set("index", "0");
-        RedisLock lock = new RedisLock(jedis, lock_key);
+        RedisDistributedLock lock = new RedisDistributedLock(jedis, lock_key);
         for (int i = 0; i < 500000; i++) {
             try {
                 if (lock.lock()) {

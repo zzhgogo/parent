@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RedisLock {
+public class RedisDistributedLock {
 
 
     private static final int DEFAULT_ACQUIRY_RESOLUTION_MILLIS = 1;
@@ -28,18 +28,18 @@ public class RedisLock {
 
     private volatile boolean locked = false;
 
-    public RedisLock(Jedis jedis, String lockKey) {
+    public RedisDistributedLock(Jedis jedis, String lockKey) {
         this.jedis = jedis;
         this.lockKey = lockKey;
     }
 
-    public RedisLock(Jedis jedis, String lockKey, int expireMsecs) {
+    public RedisDistributedLock(Jedis jedis, String lockKey, int expireMsecs) {
         this.jedis = jedis;
         this.lockKey = lockKey;
         this.expireMsecs = expireMsecs;
     }
 
-    public RedisLock(Jedis jedis, String lockKey, int expireMsecs, int timeoutMsecs) {
+    public RedisDistributedLock(Jedis jedis, String lockKey, int expireMsecs, int timeoutMsecs) {
         this.jedis = jedis;
         this.lockKey = lockKey;
         this.expireMsecs = expireMsecs;
@@ -56,11 +56,11 @@ public class RedisLock {
             executorService.submit(new Runnable() {
                 @Override
                 public void run() {
-                    RedisLock lock = new RedisLock(jedis, lock_key);
+                    RedisDistributedLock lock = new RedisDistributedLock(jedis, lock_key);
                     try {
                         if (lock.lock()) {
-                            System.out.println("last: " + RedisLock.index);
-                            RedisLock.index++;
+                            System.out.println("last: " + RedisDistributedLock.index);
+                            RedisDistributedLock.index++;
                         }
                     } finally {
                         //为了让分布式锁的算法更稳键些，持有锁的客户端在解锁之前应该再检查一次自己的锁是否已经超时，再去做DEL操作，因为可能客户端因为某个耗时的操作而挂起，

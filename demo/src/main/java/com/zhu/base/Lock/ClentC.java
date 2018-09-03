@@ -9,7 +9,7 @@ public class ClentC {
         Jedis jedis = new Jedis("127.0.0.1");
         jedis.select(3);
         String lock_key = "redis_lock_key_1";
-        RedisLock lock = new RedisLock(jedis, lock_key);
+        RedisDistributedLock lock = new RedisDistributedLock(jedis, lock_key);
         for (int i = 0; i < 300000; i++) {
             try {
                 if (lock.lock()) {
