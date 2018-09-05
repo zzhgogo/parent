@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -110,6 +111,60 @@ public class MultiThreading {
                 // FUN2
             }
         });
+
+    }
+
+    @Test
+    public void t6(){
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        for (int i = 0; i < 10 ; i++){
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        System.out.println("线程" + Thread.currentThread().getId() + " start");
+                        Thread.sleep(2000);
+                        System.out.println("线程" + Thread.currentThread().getId() + "end");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }finally {
+                        countDownLatch.countDown();
+                    }
+                }
+            });
+        }
+
+        try {
+            // 10个线程countDown()都执行之后才会释放当前线程,程序才能继续往后执行
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            // whatever
+        }
+        System.out.println("Finish");
+    }
+
+    @Test
+    public void t7() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(20);
+        AtomicInteger atomicInteger = new AtomicInteger(0);
+        CountDownLatch countDownLatch = new CountDownLatch(100000);
+        for (int i = 0; i < 100000 ; i++){
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        atomicInteger.incrementAndGet();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }finally {
+                        countDownLatch.countDown();
+                    }
+                }
+            });
+        }
+        countDownLatch.await();
+        System.out.println(atomicInteger.get());
 
     }
 }
