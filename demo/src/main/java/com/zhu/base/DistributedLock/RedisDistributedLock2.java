@@ -1,11 +1,11 @@
-package com.zhu.base.Lock;
+package com.zhu.base.DistributedLock;
 
 import redis.clients.jedis.Jedis;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RedisDistributedLock {
+public class RedisDistributedLock2 {
 
 
     private static final int DEFAULT_ACQUIRY_RESOLUTION_MILLIS = 1;
@@ -14,7 +14,7 @@ public class RedisDistributedLock {
 
     private Jedis jedis;
     /**
-     * Lock key path.
+     * sync key path.
      */
     private String lockKey;
     /**
@@ -28,18 +28,18 @@ public class RedisDistributedLock {
 
     private volatile boolean locked = false;
 
-    public RedisDistributedLock(Jedis jedis, String lockKey) {
+    public RedisDistributedLock2(Jedis jedis, String lockKey) {
         this.jedis = jedis;
         this.lockKey = lockKey;
     }
 
-    public RedisDistributedLock(Jedis jedis, String lockKey, int expireMsecs) {
+    public RedisDistributedLock2(Jedis jedis, String lockKey, int expireMsecs) {
         this.jedis = jedis;
         this.lockKey = lockKey;
         this.expireMsecs = expireMsecs;
     }
 
-    public RedisDistributedLock(Jedis jedis, String lockKey, int expireMsecs, int timeoutMsecs) {
+    public RedisDistributedLock2(Jedis jedis, String lockKey, int expireMsecs, int timeoutMsecs) {
         this.jedis = jedis;
         this.lockKey = lockKey;
         this.expireMsecs = expireMsecs;
@@ -56,11 +56,11 @@ public class RedisDistributedLock {
             executorService.submit(new Runnable() {
                 @Override
                 public void run() {
-                    RedisDistributedLock lock = new RedisDistributedLock(jedis, lock_key);
+                    RedisDistributedLock2 lock = new RedisDistributedLock2(jedis, lock_key);
                     try {
                         if (lock.lock()) {
-                            System.out.println("last: " + RedisDistributedLock.index);
-                            RedisDistributedLock.index++;
+                            System.out.println("last: " + RedisDistributedLock2.index);
+                            RedisDistributedLock2.index++;
                         }
                     } finally {
                         //为了让分布式锁的算法更稳键些，持有锁的客户端在解锁之前应该再检查一次自己的锁是否已经超时，再去做DEL操作，因为可能客户端因为某个耗时的操作而挂起，

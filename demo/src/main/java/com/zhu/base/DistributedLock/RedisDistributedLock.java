@@ -9,7 +9,7 @@ public class RedisDistributedLock {
     private Jedis jedis;
 
     /**
-     * Lock key path.
+     * sync key path.
      */
     private String lockKey;
 

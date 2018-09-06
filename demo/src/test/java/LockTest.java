@@ -1,6 +1,5 @@
-package com.zhu.base.Lock;
+package com.zhu.base.sync;
 
-import com.google.common.io.Files;
 import com.zhu.base.DistributedLock.RedisDistributedLock;
 import com.zhu.base.DistributedLock.ZookeeperDistributedLock;
 import org.apache.commons.io.FileUtils;
@@ -10,7 +9,6 @@ import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
