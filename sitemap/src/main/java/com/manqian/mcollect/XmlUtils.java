@@ -2,6 +2,7 @@ package com.manqian.mcollect;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,25 +14,24 @@ import org.dom4j.io.XMLWriter;
 
 public class XmlUtils {
 
+    public static int max_count = 40000;
 
-    public static int max_count = 800;
+    public static void createSiteMapFile(Path path, List<Map<String, Object>> dataList) throws Exception {
 
-    public static void main(String[] args) throws IOException {
-
-
-    }
-
-    public static void readXMLDemo(Path path, List<Map<String, Object>> dataList) throws Exception {
+        File file = path.toFile();
+        if (file.exists()==false){
+            file.createNewFile();
+            builtXmlDocument(new ArrayList<Map<String, Object>>(), path.toString());
+        }
         // 创建saxReader对象
         SAXReader reader = new SAXReader();
         // 通过read方法读取一个文件 转换成Document对象
-        Document document = reader.read(new File(path.toString()));
+        Document document = reader.read(file);
         //获取根节点元素对象
         Element node = document.getRootElement();
 
         List<Element> childNodes = node.elements();
 
-        System.out.println(String.format("%s has %d record", path, childNodes.size()));
 
         if(childNodes.size() > max_count){
             return;
@@ -49,15 +49,13 @@ public class XmlUtils {
             iterator.remove();
             count++;
         }
-
-        System.out.println(String.format("%s add %d record", path, count));
-
+        System.out.println(String.format("%s add %d record , total %d", path,  count, childNodes.size()));
         //实例化输出格式对象
         OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding("UTF-8");
-        File file = new File(path.toString());
         XMLWriter writer = new XMLWriter(new FileOutputStream(file), format);
         writer.write(document);
+
     }
 
     public static Element createElement(Map<String, Object> m){
@@ -66,42 +64,19 @@ public class XmlUtils {
         Element lastmod = url.addElement("lastmod");
         Element changefreq = url.addElement("changefreq");
         Element priority = url.addElement("priority");
+        if("h5".equals(TouTiaoSite.client)){
+            loc.setText(String.format("http://m.toutiao.manqian.cn/wz_%s.html", m.get("id")));
+        }else {
+            loc.setText(String.format("http://toutiao.manqian.cn/wz_%s.html", m.get("id")));
+        }
 
-        loc.setText(String.format("http://toutiao.manqian.cn/wz_%s.html", m.get("id")));
         lastmod.setText(m.get("date").toString());
         changefreq.setText("daily");
         priority.setText("0.4");
         return url;
     }
 
-    public static void listNodes(Element node) {
-        System.out.println("当前节点的名称：：" + node.getName());
-        // 获取当前节点的所有属性节点
-        List<Attribute> list = node.attributes();
-        // 遍历属性节点
-        for (Attribute attr : list) {
-            System.out.println(attr.getText() + "-----" + attr.getName()
-                    + "---" + attr.getValue());
-        }
-
-        if (!(node.getTextTrim().equals(""))) {
-            System.out.println("文本内容：：：：" + node.getText());
-        }
-
-        // 当前节点下面子节点迭代器
-        Iterator<Element> it = node.elementIterator();
-        // 遍历
-        while (it.hasNext()) {
-            // 获取某个子节点对象
-            Element e = it.next();
-            // 对子节点进行遍历
-            listNodes(e);
-        }
-    }
-
-
     public static void builtXmlDocument(List<Map<String, Object>> data, String path) throws IOException {
-
         Document doc = DocumentHelper.createDocument();
         //增加根节点
         Element urlset = doc.addElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
@@ -114,7 +89,11 @@ public class XmlUtils {
             Element changefreq = url.addElement("changefreq");
             Element priority = url.addElement("priority");
 
-            loc.setText(String.format("http://toutiao.manqian.cn/wz_%s.html", m.get("id")));
+            if("h5".equals(TouTiaoSite.client)){
+                loc.setText(String.format("http://m.toutiao.manqian.cn/wz_%s.html", m.get("id")));
+            }else {
+                loc.setText(String.format("http://toutiao.manqian.cn/wz_%s.html", m.get("id")));
+            }
             lastmod.setText(m.get("date").toString());
             changefreq.setText("daily");
             priority.setText("0.4");
@@ -122,7 +101,6 @@ public class XmlUtils {
             urlset.elements().add(0, url);
 
         });
-
         //实例化输出格式对象
         OutputFormat format = OutputFormat.createPrettyPrint();
         //设置输出编码

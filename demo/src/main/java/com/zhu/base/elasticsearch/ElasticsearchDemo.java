@@ -114,7 +114,7 @@ public class ElasticsearchDemo {
                 "\"sendDate\":\"2017-11-30\"," +
                 "\"msg\":\"你好李四\"" +
                 "}";
-        IndexResponse response = client.prepareIndex("weixin", "tweet").setSource(jsonStr, XContentType.JSON).get();
+        IndexResponse response = client.prepareIndex("mcollet_index_search", "article").setSource(jsonStr, XContentType.JSON).get();
         System.out.println("json索引名称:" + response.getIndex() + "\njson类型:" + response.getType()
                 + "\njson文档ID:" + response.getId() + "\n当前实例json状态:" + response.status());
 
