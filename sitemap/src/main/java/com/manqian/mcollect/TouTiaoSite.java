@@ -54,6 +54,7 @@ public class TouTiaoSite {
     public static void main( String args[] ) throws Exception{
          createPc();
          createH5();
+         index();
     }
 
     public static void createPc() throws Exception {
@@ -96,6 +97,45 @@ public class TouTiaoSite {
             last_site_file = Paths.get(pc_build_dir + "/msitemap_"+DateUtils.getCurrentDateStr1()+".xml");
             XmlUtils.createSiteMapFile(last_site_file, mapList);
             size = mapList.size();
+        }
+    }
+
+    public static void index() {
+        Path directoryPath1 = Paths.get(pc_build_dir);
+        Path directoryPath2 = Paths.get(h5_build_dir);
+        Path genPath = Paths.get(pc_build_dir+"/sitmapIndex.xml");
+        Path mgenPath = Paths.get(h5_build_dir+"/msitmapIndex.xml");
+        TouTiaoSite.genIndex(directoryPath1, "sitemap_", "http://toutiao.manqian.cn/", genPath);
+        TouTiaoSite.genIndex(directoryPath2, "msitemap_", "http://m.toutiao.manqian.cn/", mgenPath);
+
+    }
+
+    public static void genIndex(Path directoryPath, String startReg, String domain, Path genPath) {
+        if (Files.isDirectory(directoryPath)) {
+            StringBuilder stringBuilder = new StringBuilder();
+            try {
+                stringBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>").append("\n");
+                stringBuilder.append("<sitemapindex>").append("\n");
+                Files.list(directoryPath)
+                        .map(path -> path.toString())
+                        .map(s -> s.substring(s.lastIndexOf("/") + 1))
+                        .filter(s -> s.startsWith(startReg))
+                        .forEach(s -> {
+                            String dateStr = s.substring(s.indexOf("_") + 1, s.lastIndexOf("."));
+                            if (dateStr.startsWith("accountList") || dateStr.startsWith("tagList") || dateStr.startsWith("lanmu")) { // 特殊处理 列表页
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                dateStr = sdf.format(new Date());
+                            }
+                            stringBuilder.append("<sitemap>").append("\n")
+                                    .append("<loc>" + domain + s + "</loc>").append("\n")
+                                    .append("<lastmod>" + dateStr + "</lastmod>").append("\n")
+                                    .append("</sitemap>").append("\n");
+                        });
+                stringBuilder.append("</sitemapindex>");
+                Files.write(genPath, stringBuilder.toString().getBytes("UTF-8"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
