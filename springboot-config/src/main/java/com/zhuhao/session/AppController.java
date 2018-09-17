@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
+import redis.clients.jedis.JedisShardInfo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,7 @@ public class AppController extends BaseController{
 
     @RequestMapping("/test")
     public Object test(){
+        JedisShardInfo jedisShardInfo;
         redisTemplate.opsForValue().set("name", "朱昊");
         return redisTemplate.opsForValue().get("name");
     }
