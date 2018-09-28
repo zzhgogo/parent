@@ -13,6 +13,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
+
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.common.xcontent.XContentType;
@@ -72,7 +73,7 @@ public class ElasticsearchDemo {
     public void t1() throws UnknownHostException {
         Settings settings = Settings.builder().put("cluster.name", "manqian-search").build();
         //创建客户端
-        client = new PreBuiltTransportClient(Settings.builder().build())
+        client = new PreBuiltTransportClient(settings)
                 .addTransportAddresses(new InetSocketTransportAddress(InetAddress.getByName(HOST), PORT));
         System.out.println("连接信息:" + client.toString());
     }

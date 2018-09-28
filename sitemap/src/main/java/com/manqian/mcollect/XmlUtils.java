@@ -2,10 +2,7 @@ package com.manqian.mcollect;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.dom4j.*;
 import org.dom4j.io.OutputFormat;
@@ -49,7 +46,7 @@ public class XmlUtils {
             iterator.remove();
             count++;
         }
-        System.out.println(String.format("%s add %d record , total %d", path,  count, childNodes.size()));
+        System.out.println(String.format("%s add %d record , total %d  ", path,  count, childNodes.size())+ DateUtils.formatDate(new Date()));
         //实例化输出格式对象
         OutputFormat format = OutputFormat.createPrettyPrint();
         format.setEncoding("UTF-8");

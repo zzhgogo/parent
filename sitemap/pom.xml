@@ -69,9 +69,7 @@
         <profile>
             <id>dev</id>
             <!-- 默认激活，使用dev目录中的属性文件来替换设置过滤的资源文件中的变量 -->
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+
             <build>
                 <filters>
                     <filter>${basedir}/profiles/dev/config.properties</filter>
@@ -80,6 +78,9 @@
         </profile>
         <profile>
             <id>product</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <filters>
                     <filter>${basedir}/profiles/product/config.properties</filter>

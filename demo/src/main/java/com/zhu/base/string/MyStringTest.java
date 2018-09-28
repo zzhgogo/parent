@@ -10,9 +10,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -203,6 +207,67 @@ public class MyStringTest {
     public void t11(){
         long a = System.currentTimeMillis();
         System.out.println(a/400);
+    }
+
+    @Test
+    public void t12(){
+        Pattern p = Pattern.compile("^(http|www|ftp|)?(://)?(\\w+(-\\w+)*)(\\.(\\w+(-\\w+)*))*((:\\d+)?)(/(\\w+(-\\w+)*))*(\\.?(\\w)*)(\\?)?(((\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*(\\w*%)*(\\w*\\?)*(\\w*:)*(\\w*\\+)*(\\w*\\.)*(\\w*&)*(\\w*-)*(\\w*=)*)*(\\w*)*)$",Pattern.CASE_INSENSITIVE );
+        Matcher m = p.matcher("http://www.qqgb.com/Program/Java/JavaFAQ/JavaJ2SE/Program_146959.html");
+        if(m.find()){
+            System.out.println(m.group());
+        }
+
+        m = p.matcher("http://baike.baidu.com/view/230199.htm?fr=ala0_1");
+        if(m.find()){
+            System.out.println(m.group());
+        }
+        m = p.matcher("http://www.google.cn/gwt/x?u=http%3A%2F%2Fanotherbug.blog.chinajavaworld.com%2Fentry%2F4550%2F0%2F&btnGo=Go&source=wax&ie=UTF-8&oe=UTF-8");
+        if(m.find()){
+            System.out.println(m.group());
+        }
+        m = p.matcher("http://zh.wikipedia.org:80/wiki/Special:Search?search=tielu&go=Go");
+        if(m.find()){
+            System.out.println(m.group());
+        }
+    }
+
+    @Test
+    public void t13(){
+        isConnect("http://mmbiz.qpic.cn/mmbiz_jpg/6sVib6Gqze40rMEtoAVyKUJvgIMAUHjxZrQPy7ETnwgNcU0PQ5TgZscZGGHvZP5oqUPibCc8PCa0uXXoiaicpyTsjQ/0");
+    }
+    /**
+     * 功能：检测当前URL是否可连接或是否有效,
+     * 描述：最多连接网络 3 次, 如果 3 次都不成功，视为该地址不可用
+     * @param  urlStr 指定URL网络地址
+     * @return URL
+     */
+    public synchronized String isConnect(String urlStr) {
+        int counts = 0;
+        String retu = "";
+        if (urlStr == null || urlStr.length() <= 0) {
+            return null;
+        }
+        while (counts < 3) {
+            long start = 0;
+            try {
+                URL url = new URL(urlStr);
+                start = System.currentTimeMillis();
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                int state = con.getResponseCode();
+                 System.out.println("请求断开的URL一次需要："+(System.currentTimeMillis()-start)+"毫秒");
+                if (state == 200) {
+                    retu = "ok";
+                    System.out.println(urlStr+"--可用");
+                }
+                break;
+            }catch (Exception ex) {
+                counts++;
+                System.out.println("请求断开的URL一次需要："+(System.currentTimeMillis()-start)+"毫秒");
+                System.out.println("连接第 "+counts+" 次，"+urlStr+"--不可用");
+                continue;
+            }
+        }
+        return retu;
     }
 
 

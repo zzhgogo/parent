@@ -48,7 +48,7 @@ public class MongoUtils {
                 .append("$lte", DateUtils.yesterdayEndTime()));
         Document sortParam = new Document("auditTime", -1);
 
-        FindIterable<Document> findIterable = collection.find().sort(sortParam).limit(3000);
+        FindIterable<Document> findIterable = collection.find(queryParam).sort(sortParam);
         MongoCursor<Document> mongoCursor = findIterable.iterator();
         List<Map<String, Object>> list = new ArrayList<>();
         while (mongoCursor.hasNext()) {
@@ -70,7 +70,7 @@ public class MongoUtils {
             }
             ServerAddress serverAddress = new ServerAddress(host, port);
             MongoCredential credential = MongoCredential.createCredential(username, "mcollect", password.toCharArray());
-            MongoClient client = new MongoClient(serverAddress, Arrays.asList(credential));
+            MongoClient client = new MongoClient(serverAddress);
             mongoDatabase = client.getDatabase("mcollect");
             return mongoDatabase;
         } catch (Exception e) {

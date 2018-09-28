@@ -167,5 +167,85 @@ public class MultiThreading {
         System.out.println(atomicInteger.get());
 
     }
+
+    @Test
+    public void t8() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(20);
+
+        for (int i = 0; i < 100000 ; i++){
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getName());
+                }
+            });
+        }
+
+        executorService.shutdownNow();
+
+
+        for (int i = 0; i < 100000 ; i++){
+
+            executorService.submit(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(Thread.currentThread().getName()+"1");
+                }
+            });
+        }
+
+
+    }
+
+    @Test
+    public void t9() throws Exception{
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        Future handler = executor.submit(()->{
+
+               System.out.println(1);
+               while (true){
+
+                  System.out.println("running..");
+                  Thread.sleep(10);
+               }
+
+
+
+        });
+        executor.schedule(()->{
+            handler.cancel(true);
+            System.out.println("12");
+            //countDownLatch.countDown();
+        }, 5000, TimeUnit.MILLISECONDS);
+        countDownLatch.await();
+    }
+
+    @Test
+    public void t10(){
+        ExecutorService poll = Executors.newFixedThreadPool(100);
+        Future<Boolean> future = poll.submit(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                Thread.sleep(1000*10);
+                System.out.println("任务执行完成");
+                return true;
+            }
+        });
+        try {
+            future.get(3,TimeUnit.SECONDS);
+            System.out.println(future.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace(); //get为一个等待过程，异常中止get会抛出异常
+        } catch (ExecutionException e) {
+            e.printStackTrace(); //submit计算出现异常
+        } catch (TimeoutException e) {
+            e.printStackTrace(); //超时异常
+            future.cancel(true); //超时后取消任务
+        }finally {
+            poll.shutdown();
+            System.out.println(future.toString());
+        }
+    }
 }
 //start(),sleep(),wait(),yield(),join()
