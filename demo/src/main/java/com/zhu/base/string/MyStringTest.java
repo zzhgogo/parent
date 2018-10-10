@@ -270,6 +270,11 @@ public class MyStringTest {
         return retu;
     }
 
+    @Test
+    public void t14(){
+        System.out.println(String.class);
+    }
+
 
 
 
