@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
 /**
- * Created by liuyang on 2017/4/20
+ * Created by zzh on 2017/4/20
  *
  * 在zookeeper指定节点（locks）下创建临时顺序节点node_n
  * 获取locks下所有子节点children

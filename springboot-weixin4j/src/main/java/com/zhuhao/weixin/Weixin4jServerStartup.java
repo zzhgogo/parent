@@ -9,8 +9,8 @@ import com.foxinmy.weixin4j.util.AesToken;
 /**
  * 微信消息服务:单独作为一个服务jar包启动，推荐这种方式去处理微信消息，可在本项目的根目录运行 `mvn package`得到一个可执行的zip包。
  *
+ * @author jinyu(foxinmy @ gmail.com)
  * @className Weixin4jServerStartup
- * @author jinyu(foxinmy@gmail.com)
  * @date 2015年5月7日
  * @since JDK 1.6
  */

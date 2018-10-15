@@ -18,6 +18,8 @@ public class Weixin4jStartListener implements ApplicationListener<ContextRefresh
 
     private static final Logger logger = LoggerFactory.getLogger(Weixin4jStartListener.class);
 
+    private static String handlerPackage = "com.zhuhao.weixin.hander";
+
     @Value("${wx.port}")
     private int port;
 
@@ -30,8 +32,6 @@ public class Weixin4jStartListener implements ApplicationListener<ContextRefresh
     @Value("${wx.aesKey}")
     private String aesKey;
 
-    private static String handlerPackage = "com.zhuhao.weixin.hander";
-
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         logger.info("启动微信服务器...");
@@ -43,7 +43,7 @@ public class Weixin4jStartListener implements ApplicationListener<ContextRefresh
      * 启动weixin4j服务
      */
     public void startWxServer(ApplicationContext applicationContext) {
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 //new WeixinServerBootstrap(new AesToken(appId, token, aesKey)) // 指定开发者token信息。
                 new WeixinServerBootstrap(new AesToken("wxa4cc0a202b65477c", "weixin4j", "29d8103ec273d5af766ed8ba7eaec315")) // 指定开发者token信息。

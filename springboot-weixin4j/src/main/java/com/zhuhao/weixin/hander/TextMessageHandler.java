@@ -1,21 +1,17 @@
 package com.zhuhao.weixin.hander;
 
-import com.foxinmy.weixin4j.exception.WeixinException;
 import com.foxinmy.weixin4j.handler.MessageHandlerAdapter;
 import com.foxinmy.weixin4j.message.TextMessage;
-import com.foxinmy.weixin4j.request.WeixinMessage;
 import com.foxinmy.weixin4j.request.WeixinRequest;
 import com.foxinmy.weixin4j.response.TextResponse;
 import com.foxinmy.weixin4j.response.WeixinResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 /**
  * 文本消息处理
  *
+ * @author jinyu(foxinmy @ gmail.com)
  * @className TextMessageHandler
- * @author jinyu(foxinmy@gmail.com)
  * @date 2015年11月18日
  * @since JDK 1.6
  */
@@ -23,12 +19,12 @@ import java.util.Set;
 public class TextMessageHandler extends MessageHandlerAdapter<TextMessage> {
 
     @Override
-    public boolean canHandle0(WeixinRequest request, TextMessage message) throws WeixinException {
+    public boolean canHandle0(WeixinRequest request, TextMessage message) {
         return message.getContent().endsWith("12");
     }
 
     @Override
-    public WeixinResponse doHandle0(WeixinRequest request, TextMessage message){
+    public WeixinResponse doHandle0(WeixinRequest request, TextMessage message) {
         return new TextResponse("收到了文本消息");
     }
 

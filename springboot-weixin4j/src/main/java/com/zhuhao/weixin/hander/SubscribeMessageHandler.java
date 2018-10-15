@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 /**
  * 处理关注消息
  *
+ * @author jinyu(foxinmy @ gmail.com)
  * @className SubscribeMessageHandler
- * @author jinyu(foxinmy@gmail.com)
  * @date 2015年12月3日
  * @since JDK 1.6
  */
