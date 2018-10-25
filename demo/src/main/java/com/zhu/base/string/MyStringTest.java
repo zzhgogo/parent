@@ -272,7 +272,12 @@ public class MyStringTest {
 
     @Test
     public void t14(){
-        System.out.println(String.class);
+        String str = "财富  财富 p12";
+        String [] arr = str.split("\\s+");
+        for(String ss : arr){
+            System.out.println(ss);
+        }
+        System.out.println(arr.length);
     }
 
 

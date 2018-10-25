@@ -6,9 +6,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>spring-mybatisplus</artifactId>
+    <artifactId>spring-ssm</artifactId>
     <packaging>war</packaging>
-    <name>spring-mybatisplus</name>
+    <name>spring-ssm</name>
     <url>http://maven.apache.org</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -277,7 +277,7 @@
     </dependencies>
     
     <build>
-        <finalName>spring-mybatisplus</finalName>
+        <finalName>spring-ssm</finalName>
         <plugins>
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>

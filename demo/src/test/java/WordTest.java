@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.File;
@@ -15,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class WordTest {
@@ -75,5 +78,32 @@ public class WordTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void t3() throws Exception {
+        String path1 = "/Users/zhuhao/Desktop/wxy.txt";
+
+        List<String> wordsList1 = FileUtils.readLines(new File(path1));
+
+        wordsList1 = wordsList1.stream().filter(StringUtils::isNotBlank).collect(Collectors.toList());
+        wordsList1 = wordsList1.stream().filter(m->m.contains("http:")).collect(Collectors.toList());
+        wordsList1 = wordsList1.stream().map(m->m.substring(m.lastIndexOf("http:"))).collect(Collectors.toList());
+        wordsList1 = wordsList1.stream().filter(m -> m.contains("http://toutiao.manqian")).collect(Collectors.toList());
+        wordsList1 = wordsList1.stream().map(m->m.substring(m.lastIndexOf("_")+1, m.indexOf(".html"))).collect(Collectors.toList());
+        wordsList1.stream().forEach(System.out::println);
+
+        IOUtils.writeLines(wordsList1, IOUtils.LINE_SEPARATOR, new FileOutputStream("/data/wxy.txt"));
+
+    }
+
+
+    public static boolean isContainChinese(String str) {
+        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher m = p.matcher(str);
+        if (m.find()) {
+            return true;
+        }
+        return false;
     }
 }

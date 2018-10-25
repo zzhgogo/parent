@@ -15,7 +15,6 @@ public class TestController extends BaseController {
 
     @RequestMapping("/test")
     public Object test1(){
-        JedisShardInfo jedisShardInfo;
         redisTemplate.opsForValue().set("name", "朱昊");
         return redisTemplate.opsForValue().get("name");
     }

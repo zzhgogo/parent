@@ -8,6 +8,5 @@
     <bean id="redisHttpSessionConfiguration"  class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration" >
         <property name="maxInactiveIntervalInSeconds" value="180" />
     </bean>
-    <!--<bean id="lettuceConnectionFactory" class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"-->
-          <!--p:host-name="127.0.0.1" p:port="6379"/>-->
+
 </beans>
