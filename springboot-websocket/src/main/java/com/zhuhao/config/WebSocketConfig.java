@@ -1,4 +1,4 @@
-package com.example;
+package com.zhuhao.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

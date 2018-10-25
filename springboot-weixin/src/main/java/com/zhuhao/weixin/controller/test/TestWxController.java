@@ -1,4 +1,4 @@
-package com.zhuhao.weixin;
+package com.zhuhao.weixin.controller.test;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zhuhao.utils.HttpClientUtil;
@@ -22,9 +22,9 @@ import java.net.URLEncoder;
  * 微信授权控制器
  */
 @Controller
-public class WxController {
+public class TestWxController {
 
-    private final static Logger logger = LoggerFactory.getLogger(WxController.class);
+    private final static Logger logger = LoggerFactory.getLogger(TestWxController.class);
 
     public static final String AUTH_ACCESS_URL = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
 
@@ -109,7 +109,6 @@ public class WxController {
     @RequestMapping(value = "/async/wxcb/MP_verify_gUETqucX8FSm4NPo.txt")
     @ResponseBody
     public String fff() {
-
         return "gUETqucX8FSm4NPo";
     }
 

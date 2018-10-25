@@ -1,4 +1,4 @@
-package com.zhuhao.weixin;
+package com.zhuhao.weixin.hander;
 
 import com.zhuhao.utils.StringUtil;
 import com.zhuhao.utils.WeChatUtil;
@@ -16,7 +16,7 @@ import java.io.InputStream;
 @Component
 public class WeixinMessageDispatcher {
 
-    private final static Logger logger = LoggerFactory.getLogger(WxControllerB.class);
+    private final static Logger logger = LoggerFactory.getLogger(WeixinMessageDispatcher.class);
 
 
     public String doDispatch(HttpServletRequest request) throws Exception{

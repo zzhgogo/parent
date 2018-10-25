@@ -9,6 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>springboot-weixin4j</name>
+
 	<description>Demo project for Spring Boot</description>
 
 	<parent>

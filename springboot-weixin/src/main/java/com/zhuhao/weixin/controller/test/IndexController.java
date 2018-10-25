@@ -1,4 +1,4 @@
-package com.zhuhao.weixin;
+package com.zhuhao.weixin.controller.test;
 
 import com.zhuhao.utils.WebUtils;
 import org.springframework.stereotype.Controller;

@@ -10,17 +10,13 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>framework</module>
-        <module>rabbitmq</module>
         <module>mysql-freemaker-generator</module>
         <module>demo</module>
         <module>spring-all</module>
         <module>spring-quartz</module>
         <module>spring-socket</module>
-        <module>spring-mybatisplus</module>
         <module>spring-aop</module>
-        <module>selenium-spider</module>
-        <module>elasticsearch</module>
-        <module>sitemap</module>
+        <module>spring-ssm</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>

@@ -1,4 +1,4 @@
-package com.zhuhao.websocket;
+package com.zhuhao.vo;
 
 public class SocketMessage {
 

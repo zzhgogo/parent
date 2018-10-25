@@ -1,4 +1,4 @@
-package com.example;
+package com.zhuhao.vo;
 
 public class SocketMessageVo {
     private String name;
