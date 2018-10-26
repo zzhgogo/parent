@@ -50,4 +50,9 @@ public class Person implements Serializable {
 
         }
     }
+
+    public void method(){
+        System.out.println("123123");
+    }
+
 }

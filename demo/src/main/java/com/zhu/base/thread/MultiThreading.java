@@ -247,5 +247,32 @@ public class MultiThreading {
             System.out.println(future.toString());
         }
     }
+
+
+    @Test
+    public void t11() throws InterruptedException {
+
+        ThreadLocal<Long> time = new ThreadLocal<>();
+        time.set(System.currentTimeMillis());
+
+        CountDownLatch countDownLatch = new CountDownLatch(10000);
+
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        for (int i = 0 ; i < 10000 ; i++){
+            executorService.submit(()->{
+                try {
+                    time.set(System.currentTimeMillis());
+                    Thread.sleep(10);
+                    System.out.println(Thread.currentThread().getId() + "thread use time: " + (System.currentTimeMillis() - time.get()));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                countDownLatch.countDown();
+            });
+        }
+
+        countDownLatch.await();
+        System.out.println("Main thread use time: " + (System.currentTimeMillis() - time.get()));
+    }
 }
 //start(),sleep(),wait(),yield(),join()

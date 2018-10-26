@@ -1,12 +1,20 @@
 package com.zhu.base.string;
 
+import com.google.common.collect.Lists;
 import com.zhu.base.property.Mypropetry;
 import com.zhu.base.reflect.Person;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.collections.ListUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.lang3.StringUtils;
+
+
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
 import java.io.*;
@@ -278,7 +286,27 @@ public class MyStringTest {
             System.out.println(ss);
         }
         System.out.println(arr.length);
+
     }
+
+    @Test
+    public void t15(){
+
+        Date date = new Date();
+        date = DateUtils.addDays(date, 12);
+        String str1 = DateFormatUtils.format(date, "yyyy-MM-dd hh:mm:ss");
+
+        System.out.println(str1);
+
+        Lists.newArrayList("");
+
+
+
+
+
+
+    }
+
 
 
 

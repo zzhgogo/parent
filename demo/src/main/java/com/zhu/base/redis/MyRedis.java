@@ -7,6 +7,9 @@ import redis.clients.jedis.JedisSentinelPool;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -138,6 +141,37 @@ public class MyRedis {
                     }
             }
         }
+
+    }
+
+    @Test
+    public void jedisPusub() throws InterruptedException {
+
+
+
+        RedisSubPubListener listener = new RedisSubPubListener();
+
+        new Thread(()->{
+            Jedis jedis  = new Jedis("127.0.0.1",6379);
+            jedis.subscribe(listener, "channel");
+        }).start();
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        new Thread(()->{
+            ExecutorService executorService = Executors.newFixedThreadPool(20);
+
+            for (int i = 10000 ; i < 20000 ; i++){
+                int finalI = i;
+                executorService.submit(()->{
+                    Jedis jedis  = new Jedis("127.0.0.1", 6379);
+                    jedis.publish("channel", String.valueOf(finalI));
+                    jedis.close();
+                    //countDownLatch.countDown();
+                });
+            }
+        }).start();
+        countDownLatch.await();
+
 
     }
 }

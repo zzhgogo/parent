@@ -4,6 +4,9 @@ import com.zzh.utils.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.Message;
+import org.springframework.data.redis.connection.MessageListener;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -18,11 +21,20 @@ public class SpringTest {
     private RedisUtil redisUtil;
 
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
-    @Test
-    public void t1(){
-        redisUtil.set("name", "zhuhao2354254");
-    }
+
+
+//    @Test
+//    public void t1(){
+//        new MessageListener(){
+//            @Override
+//            public void onMessage(Message message, byte[] bytes) {
+//
+//            }
+//        };
+//    }
 
 
 
