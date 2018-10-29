@@ -8,21 +8,14 @@ import java.util.List;
  * Created by as on 2017/9/8.
  */
 //泛型用法
-public class Page<T> implements Serializable{
-    private List<T> list = new LinkedList<>();
+public class Page<T extends Man, Pk> {
 
-    public void setList(List<T> list) {
-        this.list = list;
+    T save(T entity){
+        return entity;
     }
 
-    public List<T> getList(){
-        return this.list;
-    }
+    T find(Pk pk){
 
-    public T getItemByIndex(Integer i){
-        if (i < list.size())
-            return list.get(i);
-        else
-            return null;
+        return null;
     }
 }

@@ -12,7 +12,6 @@ public class genericsTest {
     public static void main(String[] args){
         List<Integer> list = new LinkedList<>();
         list.add(1);list.add(2);
-        Page<Integer> page = new Page<>();
-        page.setList(list);
+
     }
 }
