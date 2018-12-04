@@ -1,5 +1,6 @@
 package wechat;
 
+import com.zhu.framework.wechat.MediaUtil;
 import net.sf.json.JSONObject;
 import util.HttpClientUtil;
 
@@ -16,12 +17,13 @@ public class WeChatSeting {
     /**
      * 微信公众号唯一标识
      */
-    public static final String APPID ="wxa4cc0a202b65477c";
+    public static final String APPID ="wx3ff89b6b9577c419";
 
     /**
      * 微信公众号的appsecret
      */
-    public static final String APPSECRET = "29d8103ec273d5af766ed8ba7eaec315";
+    public static final String APPSECRET = "05f62ac73bf46b3ead693329004d0725";
+
 
     /**
      * 菜单创建-微信接口
@@ -37,19 +39,10 @@ public class WeChatSeting {
     public static final String file_path = "/1.txt";
 
 
-   public static void main(String[] args){
-       StringBuilder result = new StringBuilder();
-       try{
-           BufferedReader br = new BufferedReader(new FileReader(WeChatSeting.class.getResource(file_path).getFile()));
-           String s = null;
-           while((s = br.readLine())!=null){
-               result.append(System.lineSeparator()+s);
-           }
-           br.close();
-           WeChatSeting.initMenu(result.toString());
-       }catch(Exception e){
-           e.printStackTrace();
-       }
+   public static void main(String[] args) throws Exception{
+       String accessToken = getAccessToken();
+       String string = MediaUtil.uploadMedia(accessToken, "image/jpg", "http://mmbiz.qpic.cn/mmbiz_jpg/lseiciadpq29ibM1ZzVJZlq5N8kVyYrEtnicN0K8wFyhJ0xQWE5oEQbd1CogAR8CQWTNYZgy7WGtcuglLia2mlbUbow/0");
+       System.out.println(string);
    }
 
     /**

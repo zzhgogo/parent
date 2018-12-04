@@ -23,8 +23,10 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -280,31 +282,52 @@ public class MyStringTest {
 
     @Test
     public void t14(){
-        String str = "财富  财富 p12";
-        String [] arr = str.split("\\s+");
-        for(String ss : arr){
-            System.out.println(ss);
-        }
-        System.out.println(arr.length);
+       List<String > list = new ArrayList<>();
+       list.add("111");list.add("111");list.add("111");
+       System.out.println(list);
 
     }
 
     @Test
-    public void t15(){
+    public void t15() throws Exception{
 
-        Date date = new Date();
-        date = DateUtils.addDays(date, 12);
-        String str1 = DateFormatUtils.format(date, "yyyy-MM-dd hh:mm:ss");
+        List<String> weChatIds = IOUtils.readLines(new FileInputStream("/Users/zhuhao/Documents/a_url.txt"));
 
-        System.out.println(str1);
+        int page = weChatIds.size()/40000+1;
 
-        Lists.newArrayList("");
+        for (int i = 0; i < page; i++){
+            int start = i*40000;
+            int end   = (i+1)*40000 < weChatIds.size() ? (i+1)*40000 : weChatIds.size();
+            List<String> childlist = weChatIds.subList(start, end);
+            List<String> stringList = childlist.stream()
+                    .map(m -> String.format("http://toutiao.manqian.cn/account_%s.html  http://m.toutiao.manqian.cn/account_%s.html", m, m))
+                    .collect(Collectors.toList());
+            IOUtils.writeLines(stringList, IOUtils.LINE_SEPARATOR, new FileOutputStream("/data/account_url/url_"+i+".txt"));
+        }
 
+    }
 
+    @Test
+    public void t16() throws Exception{
+        Set<String> result = new HashSet<>();
+        InputStream inputStream1  = new FileInputStream("/Users/zhuhao/Documents/p_silan.txt");
+        List<String> logs1 = IOUtils.readLines(inputStream1);
+        for (String log : logs1){
+            log = log.substring(log.indexOf("http"));
+            result.add(log.trim());
+        }
 
+        InputStream inputStream2  = new FileInputStream("/Users/zhuhao/Documents/p_silan1.txt");
+        List<String> logs2 = IOUtils.readLines(inputStream2);
+        for (String log : logs2){
+            log = log.substring(log.indexOf("http"));
+            result.add(log.trim());
+        }
 
-
-
+        FileWriter fileWriter = new FileWriter("/data/p_silian_1204.txt");
+        IOUtils.writeLines(result, IOUtils.LINE_SEPARATOR, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
     }
 
 
