@@ -17,6 +17,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.*;
 
 public class HttpDemo {
@@ -92,14 +93,14 @@ public class HttpDemo {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        Map<String,String> headers=new HashMap();
+        Map<String, String> headers = new HashMap();
         headers.put("Connection", "keep-alive");
         headers.put("Accept", "image/webp,image/apng,image/*,*/*;q=0.8");
         headers.put("Accept-Encoding", "gzip, deflate, br");
         headers.put("Accept-Language", "zh-CN,zh;q=0.9");
         headers.put("Cache-Control", "no-cache");
         headers.put("User-Agent", "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36");
-        downLoadFile("http://wx.qlogo.cn/mmhead/Q3auHgzwzM6m0icBwkbMY9bSuDlGMvw9m39sTMHp0xZE3Ku36WWBn2Q/10", "/data/test.jpg",headers);
+        downLoadFile("http://wx.qlogo.cn/mmhead/Q3auHgzwzM6m0icBwkbMY9bSuDlGMvw9m39sTMHp0xZE3Ku36WWBn2Q/10", "/data/test.jpg", headers);
     }
 
     /**
@@ -190,6 +191,15 @@ public class HttpDemo {
             String res = formPost("http://test.m.toutiao.manqian.cn/async/addConsultAsk", map);
             System.out.println(res);
         }
+    }
+
+    @Test
+    public void t2() {
+        Map<String, String> map = new HashMap<>();
+        map.put("key", "811abef2965984ea0c6400b413563f50");
+        String res = formPost("http://c.mipcdn.com/update-ping/c/" + URLEncoder.encode("m.toutiao.manqian.cn/mip/wz_aKVnv2HX2N.html"), map);
+        System.out.println(res);
+
     }
 
 

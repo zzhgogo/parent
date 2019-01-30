@@ -1,5 +1,6 @@
 package com.zhu.base.string;
 
+import com.google.common.collect.Lists;
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -61,7 +62,7 @@ public class SilianTest {
     public void t3() throws Exception{
         Jedis jedis = new Jedis("127.0.0.1",6379);
         jedis.select(15);
-        FileReader fileReader = new FileReader("/data/m_silian_1204.txt");
+        FileReader fileReader = new FileReader("/data/m_silian_1214.txt");
         List<String> list1 = IOUtils.readLines(fileReader);
         list1 = list1.stream().map(m -> m.replace("m.toutiao.manqian.cn", "toutiao.manqian.cn")).collect(Collectors.toList());
         fileReader.close();
@@ -73,23 +74,61 @@ public class SilianTest {
 
     @Test
     public void t4() throws Exception{
+        Jedis jedis = new Jedis("127.0.0.1",9379);
+        jedis.select(11);
+        System.out.println(jedis.scard("m_silan"));
+        List<String> list = Lists.newArrayList();
+
+        long total = jedis.scard("m_silan");
+        long pagesize =20l;
+        long pages = total / pagesize;
+        for (int i = 0; i < total/pagesize; i++){
+
+            Set<String> set = jedis.spop("m_silan" , pagesize);
+            list.addAll(set);
+            System.out.println(i +", "+pages);
+        }
+        FileWriter fileWriter = new FileWriter("/data/m_silian_1214.txt");
+        IOUtils.writeLines(list, IOUtils.LINE_SEPARATOR, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+    @Test
+    public void t5() throws Exception{
         Jedis jedis = new Jedis("127.0.0.1",6379);
         jedis.select(15);
-        Set<String> set = jedis.smembers("p_silian");
-        FileWriter fileWriter = new FileWriter("/data/p_silian_1204.txt");
-        IOUtils.writeLines(set, IOUtils.LINE_SEPARATOR, fileWriter);
+        FileReader fileReader = new FileReader("/data/p_silian_1214.txt");
+        List<String> list1 = IOUtils.readLines(fileReader);
+        fileReader.close();
+        for(String url : list1){
+            jedis.sadd("p_silian", url);
+        }
+    }
+
+    @Test
+    public void t6() throws Exception{
+        Jedis jedis = new Jedis("127.0.0.1",6379);
+        jedis.select(15);
+        Set<String> strings = jedis.smembers("p_silian");
+        for (String string: strings){
+            jedis.sadd("m_silian", string.replace("\"", ""));
+        }
+    }
+
+    @Test
+    public void t7() throws Exception{
+        Jedis jedis = new Jedis("127.0.0.1",6379);
+        jedis.select(15);
+        Set<String> strings = jedis.smembers("m_silian");
+        strings = strings.stream().map(m -> m.replace("http://toutiao.manqian.cn", "http://m.toutiao.manqian.cn")).collect(Collectors.toSet());
+        FileWriter fileWriter = new FileWriter("/data/m_silian_1204.txt");
+        IOUtils.writeLines(strings, IOUtils.LINE_SEPARATOR, fileWriter);
         fileWriter.flush();
         fileWriter.close();
 
-        PrintWriter printWriter = new PrintWriter("/data/m_silian_1204.txt");
-        for (String url: set){
-            url = url.replace("http://toutiao.manqian.cn", "http://m.toutiao.manqian.cn");
-            printWriter.println(url);
-        }
-        printWriter.flush();
-        printWriter.close();
-
     }
+
 
 
 }

@@ -20,6 +20,7 @@ import org.junit.Test;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -332,6 +333,10 @@ public class MyStringTest {
 
 
 
-
+    @Test
+    public void t17() throws UnsupportedEncodingException {
+        String url = "http://manqian1.cn/";
+        System.out.println(URLEncoder.encode(URLEncoder.encode(url, "UTF-8"), "UTF-8"));
+    }
 
 }
