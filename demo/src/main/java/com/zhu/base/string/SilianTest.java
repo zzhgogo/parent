@@ -76,19 +76,18 @@ public class SilianTest {
     public void t4() throws Exception{
         Jedis jedis = new Jedis("127.0.0.1",9379);
         jedis.select(11);
-        System.out.println(jedis.scard("m_silan"));
+        System.out.println(jedis.scard("p_silan"));
         List<String> list = Lists.newArrayList();
 
-        long total = jedis.scard("m_silan");
+        long total = jedis.scard("p_silan");
         long pagesize =20l;
         long pages = total / pagesize;
         for (int i = 0; i < total/pagesize; i++){
-
-            Set<String> set = jedis.spop("m_silan" , pagesize);
+            Set<String> set = jedis.spop("p_silan" , pagesize);
             list.addAll(set);
             System.out.println(i +", "+pages);
         }
-        FileWriter fileWriter = new FileWriter("/data/m_silian_1214.txt");
+        FileWriter fileWriter = new FileWriter("/data/p_silian_0131.txt");
         IOUtils.writeLines(list, IOUtils.LINE_SEPARATOR, fileWriter);
         fileWriter.flush();
         fileWriter.close();
@@ -128,6 +127,29 @@ public class SilianTest {
         fileWriter.close();
 
     }
+
+
+    @Test
+    public void t8() throws Exception{
+        FileReader fileReader = new FileReader("/data/p_silian_0131.txt");
+        List<String> list1 = IOUtils.readLines(fileReader);
+        fileReader.close();
+        int count = list1.size();
+
+        for(int i = 0; i < count/95000+1; i++){
+            int start = i * 95000;
+            int end   = i * 95000 + 95000;
+            end = end < count ? end : count;
+            List<String> subList = list1.subList(start, end);
+            FileWriter fileWriter = new FileWriter("/data/p_silian_0131_"+i+".txt");
+            subList.stream().forEach(System.out::println);
+            IOUtils.writeLines(subList, null, fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
+        }
+
+    }
+
 
 
 
