@@ -1,9 +1,5 @@
 package com.zhuhao.schedule;
 
-import com.zhuhao.config.RedisConfig;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,11 +12,11 @@ import java.util.Date;
  * @Description:
  */
 @Component("testJob")
-public class TestJob{
+public class TestJob {
 
     private final static Logger logger = LoggerFactory.getLogger(TestJob.class);
 
-    public void job1(){
+    public void job1() {
         logger.info("job1 start.. {}", new Date());
     }
 

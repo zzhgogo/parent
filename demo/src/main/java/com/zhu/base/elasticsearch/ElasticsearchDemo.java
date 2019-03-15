@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.JsonObject;
 import org.apache.commons.lang.time.DateUtils;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
@@ -91,7 +92,7 @@ public class ElasticsearchDemo {
      */
     @Test
     public void addIndex1() throws IOException {
-        IndexResponse response = client.prepareIndex("msg", "tweet").setSource(XContentFactory.jsonBuilder()
+        IndexResponse response = client.prepareIndex("business", "newsFlash", System.currentTimeMillis()+"").setSource(XContentFactory.jsonBuilder()
                 .startObject().field("userName", "张三")
                 .field("sendDate", new Date())
                 .field("msg", "你好李四")
@@ -211,19 +212,21 @@ public class ElasticsearchDemo {
 
     @Test
     public void search1(){
-        SearchRequestBuilder searchRequestBuilder = client.prepareSearch("ss").setTypes("tweet")
-                .addSort("_score", SortOrder.DESC);
-        QueryStringQueryBuilder queryBuilder = QueryBuilders.queryStringQuery("你好李四");
-        searchRequestBuilder.setQuery(queryBuilder);
+        SearchRequestBuilder searchRequestBuilder = client.prepareSearch("manqian_business_index").setTypes("newsflash").setSize(1000);
         SearchResponse response = searchRequestBuilder.execute().actionGet();
-
         SearchHits searchHits = response.getHits(); //获取返回
         for (SearchHit hit: searchHits.getHits()){
             System.out.println(hit.getSourceAsString());
+            client.prepareDelete("manqian_business_index", "newsflash", hit.id()).get();
         }
     }
 
 
+    @Test
+    public void deleteIndex(){
+//        DeleteIndexResponse dResponse = client.admin().indices().prepareDelete("business")
+//                .execute().actionGet();
+    }
 
     @After
     public void t100(){
@@ -231,7 +234,7 @@ public class ElasticsearchDemo {
             client.close();
             System.out.println("关闭:" + client.toString());
         }
-
-
     }
+
+
 }

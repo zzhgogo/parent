@@ -26,7 +26,7 @@ import static org.quartz.TriggerBuilder.newTrigger;
  * @Date: 2018/10/24 下午5:00
  * @Description:
  */
-@Configuration
+//@Configuration
 public class ScheduleConfig implements ApplicationContextAware {
 
     private final static Logger logger = LoggerFactory.getLogger(ScheduleConfig.class);
