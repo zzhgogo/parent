@@ -6,8 +6,9 @@ import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,25 +17,47 @@ public class seleniumDemo {
     public static void main(String[] args) {
         System.setProperty("webdriver.firefox.bin", "/Users/zhuhao/firefox-sdk/bin/Firefox");
         System.setProperty("webdriver.chrome.driver", "/usr/local/chromedriver/chromedriver");
-        System.setProperty("phantomjs.binary.path", "/Users/zhuhao/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs");
-        //WebDriver webDriver = new PhantomJSDriver();
-        WebDriver webDriver = new ChromeDriver();
+        System.setProperty("phantomjs.binary.path", "/usr/local/phantomjs-2.1.1-macosx/bin/phantomjs");
+//        WebDriver webDriver = new PhantomJSDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+
+        WebDriver webDriver = new ChromeDriver(chromeOptions);
         //WebDriver webDriver = new FirefoxDriver();
-        webDriver.get("https://weixin.sogou.com/");
+        webDriver.get("https://weixin.sogou.com/weixin?type=2&query=%E6%96%B0%E4%B8%89%E6%9D%BF&ie=utf8&s_from=input&_sug_=n&_sug_type_=1&w=01015002&oq=&ri=10&sourceid=sugg&sut=0&sst0=1553593763855&lkt=0%2C0%2C0&p=40040108");
 
-        List<WebElement> webElements = webDriver.findElements(By.xpath("//*[@id=\"pc_0_0\"]/li/div[2]/h3/a"));
+//        System.out.println(webDriver.getTitle());
+//        _inputAndSubmit(webDriver, "#query", "财富");
 
-        String hander = webDriver.getWindowHandle();
-
-        webElements.stream().forEach(webElement -> {
-            webElement.click();
-            sleepRandom(1000, 2000);
-            switchToOtherWindow(webDriver, hander);
-            System.out.println(webDriver.getTitle());
-            closeOtherWindowByHandler(webDriver, hander);
-        });
-        //webDriver.getWindowHandles().stream().forEach(System.out::println);
+        sleepRandom(3000, 5000);
+        System.out.println(webDriver.getPageSource());
+        _clickBySelector(webDriver, "#tool_show");
         webDriver.close();
+    }
+
+
+    public static void _inputAndSubmit(WebDriver driver, String selector, String word) {
+        WebElement we = driver.findElement(By.cssSelector(selector));
+        if (we != null) {
+            we.clear();
+            for (int i = 0; i < word.length(); i++) {
+                char item = word.charAt(i);
+                we.sendKeys(String.valueOf(item));
+            }
+            we.submit();
+        } else {
+
+        }
+    }
+
+
+    public static void _clickBySelector(WebDriver driver, String selector) {
+        WebElement webElement = driver.findElement(By.cssSelector(selector));
+        if (webElement != null && webElement.isDisplayed()) {
+            webElement.click();
+        } else {
+
+        }
     }
 
 

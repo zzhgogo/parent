@@ -335,8 +335,20 @@ public class MyStringTest {
 
     @Test
     public void t17() throws UnsupportedEncodingException {
-        String url = "http://manqian1.cn/";
-        System.out.println(URLEncoder.encode(URLEncoder.encode(url, "UTF-8"), "UTF-8"));
+
+        System.out.println(regexField("msg_cdn_url", " var msg_cdn_url = \"http://mmbiz.qpic.cn/mmbiz_jpg/NHMKBayTaMe5QCuJQNfA4gkjqfQ3gibWOLBCKjXbNuiaJpYkMDuLavTUJ7S7GPqo4zQZwAAJaCpBhrDeWRUOE83Q/0?wx_fmt=jpeg\"; \n" +
+                "    var cdn_url_1_1  = \"https://mmbiz.qlogo.cn/mmbiz_jpg/NHMKBayTaMe5QCuJQNfA4gkjqfQ3gibWOsk0vs3nzP2jndUJU3fqIdNGFibfLqiaagrxaBJtkAo0XThzKuaWX44cQ/0?wx_fmt=jpeg\"; \n" +
+                "    var cdn_url_235_1 = \"https://mmbiz.qlogo.cn/mmbiz_jpg/NHMKBayTaMe5QCuJQNfA4gkjqfQ3gibWOLBCKjXbNuiaJpYkMDuLavTUJ7S7GPqo4zQZwAAJaCpBhrDeWRUOE83Q/0?wx_fmt=jpeg\";"));
+    }
+
+    public static String regexField(String filed,String pageSource){
+        System.out.println(pageSource);
+        Pattern pattern = Pattern.compile("(?<= var cdn_url_235_1 = \").*?(?=\";)");
+        Matcher matcher = pattern.matcher(pageSource);
+        if(matcher.find()){
+            return matcher.group();
+        }
+        return null;
     }
 
 }

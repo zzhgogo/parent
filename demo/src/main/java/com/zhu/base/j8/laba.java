@@ -1,5 +1,8 @@
 package com.zhu.base.j8;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import org.apache.commons.lang.math.RandomUtils;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -38,6 +42,8 @@ public class laba {
         list.stream().map(item -> item.split(" ")).flatMap(Arrays::stream).distinct().collect(Collectors.toList()).forEach(System.out::println);
 
         System.out.println("================================================");
+
+        IntStream.of(1,2,3).sum();
     }
 
     //http://www.java2s.com/Tutorials/Java/Java_Stream/0290__Java_Stream_Collect_to_Map.htm
@@ -88,5 +94,21 @@ public class laba {
         public void setName(String name) {
             this.name = name;
         }
+    }
+
+    @Test
+    public void t3(){
+        Joiner joiner = Joiner.on("_").skipNulls();
+        System.out.println(joiner.join("Harry", null, "Ron", "Hermione"));
+
+
+        System.out.println(Joiner.on(",").join(Arrays.asList(1, 5, 7)));
+
+        Iterable<String> iterable = Splitter.on(',')
+                .trimResults()
+                .omitEmptyStrings()
+                .split("foo,bar,,   qux");
+        iterable.forEach(System.out::println);
+
     }
 }
