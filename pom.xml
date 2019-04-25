@@ -17,6 +17,7 @@
         <module>spring-socket</module>
         <module>spring-aop</module>
         <module>spring-ssm</module>
+        <module>springboot</module>
     </modules>
     <properties>
         <junit.version>4.12</junit.version>
@@ -36,11 +37,7 @@
                 <artifactId>commons-lang</artifactId>
                 <version>2.6</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.1</version>
-            </dependency>
+
             <!-- end -->
 
             <!-- test -->

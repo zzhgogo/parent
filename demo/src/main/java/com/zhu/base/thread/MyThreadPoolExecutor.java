@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
+
 public class MyThreadPoolExecutor  extends ThreadPoolExecutor{
 
     private final ThreadLocal<Long> startTime = new ThreadLocal<>();
@@ -31,21 +32,6 @@ public class MyThreadPoolExecutor  extends ThreadPoolExecutor{
 
     public static void main(String[] args){
         ThreadPoolExecutor threadPoolExecutor = new MyThreadPoolExecutor(1, 2000, 2, TimeUnit.SECONDS, new SynchronousQueue());
-//        for (int i =0; i < 10 ; i++){
-//            final int k = i;
-//            threadPoolExecutor.execute(()->{
-//                Thread thread = Thread.currentThread();
-//                thread.setName("线程—"+k);
-//                Random rand = new Random();
-//                long delay = rand.nextInt(500)+1;
-//                try {
-//                    Thread.sleep(delay);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            });
-//        }
         List<Integer> list = new ArrayList<>();
         for (int i =0; i < 109 ; i++){
             list.add(Integer.valueOf(i));

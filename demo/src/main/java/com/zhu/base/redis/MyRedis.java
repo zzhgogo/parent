@@ -151,25 +151,23 @@ public class MyRedis {
 
         RedisSubPubListener listener = new RedisSubPubListener();
 
-        new Thread(()->{
+        Thread thread = new Thread(()->{
             Jedis jedis  = new Jedis("127.0.0.1",6379);
             jedis.subscribe(listener, "channel");
-        }).start();
+        });
+        thread.start();
 
+
+        ExecutorService executorService = Executors.newFixedThreadPool(20);
+        for (int i = 10000 ; i < 20000 ; i++){
+            int finalI = i;
+            executorService.submit(()->{
+                Jedis jedis  = new Jedis("127.0.0.1", 6379);
+                jedis.publish("channel", String.valueOf(finalI));
+                jedis.close();
+            });
+        }
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        new Thread(()->{
-            ExecutorService executorService = Executors.newFixedThreadPool(20);
-
-            for (int i = 10000 ; i < 20000 ; i++){
-                int finalI = i;
-                executorService.submit(()->{
-                    Jedis jedis  = new Jedis("127.0.0.1", 6379);
-                    jedis.publish("channel", String.valueOf(finalI));
-                    jedis.close();
-                    //countDownLatch.countDown();
-                });
-            }
-        }).start();
         countDownLatch.await();
 
 

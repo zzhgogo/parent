@@ -40,22 +40,22 @@ public class ImgController {
             url = url.substring(0, url.lastIndexOf("?"));
         }
         // 指定url可访问 不然会有安全漏洞问题
-        if (!url.contains("mmbiz") &&
-                !url.contains("mmhead") &&
-                !url.contains("mmsns") &&
-                !url.contains("images.tmtpost.com") &&
-                !url.contains("mmbiz.qlogo.cn") &&
-                !url.contains("mmbiz.qpic.cn") &&
-                !url.contains("wx.qlogo.cn") &&
-                !url.contains("wx.qpic.cn") &&
-                !url.contains("img") &&
-                !url.contains("png") &&
-                !url.contains("gif") &&
-                !url.contains("jpg") &&
-                !url.contains("mmsns.qpic.cn") &&
-                !url.contains("manqian.cn")) {
-            return;
-        }
+//        if (!url.contains("mmbiz") &&
+//                !url.contains("mmhead") &&
+//                !url.contains("mmsns") &&
+//                !url.contains("images.tmtpost.com") &&
+//                !url.contains("mmbiz.qlogo.cn") &&
+//                !url.contains("mmbiz.qpic.cn") &&
+//                !url.contains("wx.qlogo.cn") &&
+//                !url.contains("wx.qpic.cn") &&
+//                !url.contains("img") &&
+//                !url.contains("png") &&
+//                !url.contains("gif") &&
+//                !url.contains("jpg") &&
+//                !url.contains("mmsns.qpic.cn") &&
+//                !url.contains("manqian.cn")) {
+//            return;
+//        }
 
         if (url.startsWith("https://") || url.startsWith("http://")) {
 
