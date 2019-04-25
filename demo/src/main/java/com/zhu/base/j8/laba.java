@@ -101,7 +101,6 @@ public class laba {
         Joiner joiner = Joiner.on("_").skipNulls();
         System.out.println(joiner.join("Harry", null, "Ron", "Hermione"));
 
-
         System.out.println(Joiner.on(",").join(Arrays.asList(1, 5, 7)));
 
         Iterable<String> iterable = Splitter.on(',')

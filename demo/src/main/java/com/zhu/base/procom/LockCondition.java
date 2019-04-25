@@ -11,8 +11,10 @@ public class LockCondition {
 
     public static void main(String[] args) {
         Lock lock = new ReentrantLock();
+
         Condition producerCondition = lock.newCondition();
         Condition consumerCondition = lock.newCondition();
+
         Resource2 resource = new Resource2(lock,producerCondition,consumerCondition);
 
         //生产者线程
