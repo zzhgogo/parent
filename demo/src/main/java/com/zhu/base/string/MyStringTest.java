@@ -1,5 +1,7 @@
 package com.zhu.base.string;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.zhu.base.property.Mypropetry;
 import com.zhu.base.reflect.Person;
@@ -15,7 +17,21 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+import us.codecraft.webmagic.utils.HttpClientUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -25,18 +41,17 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
+
+
 /**
- * Created with IntelliJ IDEA.
- * Author: as
- * Time:  2017/9/28 15:31
- * Description:
+ * @author zhuhao
  */
-@SuppressWarnings("ALL")
 public class MyStringTest {
 
 
@@ -79,6 +94,7 @@ public class MyStringTest {
 
     @Test
     public void t7(){
+        System.out.println(new Date());
         System.out.println( new Person() instanceof Object);
         Map<Person ,Person> hMap = new HashMap<>();
     }
@@ -97,5 +113,29 @@ public class MyStringTest {
         String time = formatter.format(c.getTime());
         System.out.println(time);
     }
+
+    @Test
+    public void t9(){
+        Cache<String, Object> cache = CacheBuilder.newBuilder()
+                .maximumSize(100)
+                .expireAfterWrite(3, TimeUnit.MINUTES)
+                .concurrencyLevel(10)
+                .recordStats()
+                .build();
+
+        cache.put("key", Lists.newArrayList("12312313"));
+
+        Object value = cache.getIfPresent("key");
+
+        System.out.println(value);
+    }
+
+    @Test
+    public void t11(){
+
+
+    }
+
+
 
 }

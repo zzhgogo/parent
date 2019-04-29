@@ -2,7 +2,6 @@ package com.zhu.base.mqtt;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
-import com.google.common.collect.Lists;
 import com.manqian.toutiao.answer.api.IAnswerService;
 import com.manqian.toutiao.answer.api.IQuestionService;
 import com.manqian.toutiao.answer.api.IQuestionTagService;
@@ -122,9 +121,30 @@ public class BaiduZhidaoSpider extends ToutiaoDubbo {
 
     }
 
+    public void f() {
+        List<Answer> list = answerService.findAll();
+
+        list.forEach(question -> {
+            Document contentDoc = Jsoup.parse(question.getContent());
+            Elements elements = contentDoc.getElementsByTag("a");
+            Iterator<Element> iterator = elements.iterator();
+            while (iterator.hasNext()){
+                Element element = iterator.next();
+                element.remove();
+            }
+            question.setContent(contentDoc.toString());
+            answerService.save(question);
+        });
+
+
+
+
+    }
+
 
     public static void main(String[] args) {
         BaiduZhidaoSpider spider = new BaiduZhidaoSpider();
+        spider.f();
         Stream.iterate(1, i->i+1).limit(10).forEach(i->{
            List<String> urls = spider.spider("https://jin.baidu.com/ask?pn="+i);
            if(CollectionUtils.isNotEmpty(urls)){
