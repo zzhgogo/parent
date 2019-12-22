@@ -39,8 +39,6 @@ public class QRCodeUtil2 {
         BufferedImage image = toImage(bm);
         ImageIO.write(image, format, output);   //把二维码写到response的输出流
 
-
-
     }
 
     private static BufferedImage toImage(BitMatrix bm) {
@@ -57,8 +55,8 @@ public class QRCodeUtil2 {
 
     public static void main(String[] args) throws IOException, WriterException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        QRCodeUtil2.createErCode("朱昊", byteArrayOutputStream);
-        IOUtils.write(byteArrayOutputStream.toByteArray(), new FileOutputStream("/data/er.jpg"));
+        QRCodeUtil2.createErCode("https://github.com/heavenfucking/parent/tree/master/demo/src/main/resources/font", byteArrayOutputStream);
+        IOUtils.write(byteArrayOutputStream.toByteArray(), new FileOutputStream("E:\\shuiyin/er.jpg"));
     }
 
 }

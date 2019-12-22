@@ -19,7 +19,7 @@ public class DrawUtils {
     public static BufferedImage draw0(String templateImg, String headImg, String erCodeImg, String nickName) throws Exception {
         BufferedImage templateImage = ImageIO.read(Files.newInputStream(Paths.get(templateImg)));
         BufferedImage headImage = ImageIO.read(Files.newInputStream(Paths.get(headImg)));
-        BufferedImage erCodeImage = ImageIO.read(Files.newInputStream(Paths.get(erCodeImg)));
+        BufferedImage erCodeImage = QRCodeGenerator.generateQRCodeImage("https://blog.csdn.net/gisboygogogo/article/details/86036656", 240,240);
 
 
         //绘制圆形图像
@@ -27,7 +27,7 @@ public class DrawUtils {
         Ellipse2D.Double shape = new Ellipse2D.Double(84, 50, 100, 100);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setClip(shape);
-        graphics2D.drawImage(resize(100, 100, headImage), 84, 50, 100, 100, null);
+        graphics2D.drawImage(headImage, 84, 50, 100, 100, null);
         graphics2D.dispose();
 
         //绘制昵称
@@ -42,7 +42,7 @@ public class DrawUtils {
 
         //绘制二维码
         graphics2D = templateImage.createGraphics();
-        graphics2D.drawImage(resize(240, 240, erCodeImage), 730, 1590, null);
+        graphics2D.drawImage(erCodeImage, 730, 1590, null);
         graphics2D.dispose();
 
         return templateImage;
