@@ -8,7 +8,7 @@
     <name>spring-socket</name>
     <url>http://maven.apache.org</url>
     <properties>
-        <spring.version>4.1.1.RELEASE</spring.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <jstl>1.2</jstl>
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <version>5.2.7.RELEASE</version>
         </dependency>
 
         <dependency>
