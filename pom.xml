@@ -19,7 +19,7 @@
         <module>spring-ssm</module>
     </modules>
     <properties>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <jedis.version>2.9.0</jedis.version>
         <easypoi.version>2.3.1</easypoi.version>
     </properties>
